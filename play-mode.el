@@ -10,7 +10,7 @@
   )
 (defvar play-font-lock-keywords
   (let ((kw1 (mapconcat 'identity
-                        '("play" "scene" "author" "act")
+                        '("play" "scene" "author" "act" "title")
                         "\\|")))
     (list
      ;; keywords
