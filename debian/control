@@ -32,7 +32,7 @@ Description: Playwriting typing and typesetting help.
 Package: plywood-elisp
 Architecture: all
 Depends: emacs21 | emacs20 | emacsen
-Suggests: plywood, python-plywood, xpdf, tetex
+Suggests: plywood, xpdf, tetex
 Description: Playwriting typing and typesetting help.
  The plywood project is a project to help type and typeset plays. It comprises 
  a small structured-text format, an Emacs mode, a translation program and a 
