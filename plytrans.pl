@@ -9,18 +9,12 @@ print <<'EO_TeX';
 \parindent 0pt
 \usepackage{fancyheadings}
 
-\renewcommand{\part}{\@startsection{part}%
-  {-1}%
-  {-1mm}%
-  {-\baselineskip}%
-  {0.5\baselineskip}%
-  {\normalfont}}%%
-\newcommand{\marginlabel}[1]
-  {\mbox{}\marginpar{\raggedleft\hspace{0pt}#1}}
 \pagestyle{fancy}
 \addtolength{\headwidth}{\marginparsep}
 \addtolength{\headwidth}{\marginparwidth}
 \title{Deathtrap}
+\lhead[\fancyplain{}{\bfseries\thepage}]%
+      {\fancyplain{}{\bfseries\rightmark}}
 \rhead[\fancyplain{}{\bfseries\leftmark}]%
       {\fancyplain{}{\bfseries\thepage}}
 \cfoot[]{}
