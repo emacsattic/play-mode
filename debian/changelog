@@ -1,0 +1,8 @@
+plywood (0.5.1-1) unstable; urgency=low
+
+  * Initial Release.
+  * Fixed depends to depend on python2.2, not python
+  * I think I'm going to install under /usr now. :) 
+
+ -- Monty Taylor <mordred@inaugst.com>  Sat,  4 May 2002 12:17:30 -0500
+
