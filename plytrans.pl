@@ -1,12 +1,10 @@
 #!/usr/bin/perl
 #
-#
+# Translate ply files into LaTeX.
 
-$/='\n\n';
-@foo=<>;
-@bar = split m/\n\n/s, $foo[0];
+$\=$/="\n\n";
 
-print q(
+print <<'EO_TeX';
 \documentclass[letterpaper]{article}
 \parindent 0pt
 \usepackage{fancyheadings}
@@ -61,22 +59,16 @@ print q(
 
 \def\direction#1
 {\textsf{\textbf{#1 }}}
+EO_TeX
 
-);
-
-foreach (@bar) {
-	m/^\s*\w+\s*:/ && next;
-	##FIXMEs,\G"([^"]*)",\`\`$1",g;
-	s,/([^/]+)/,\\textit{$1},g;
-	#s,(\[[^\]]+\]),\\textit{\\textbf{$1}},g;
-	s,^\s*\[\s*([^\]]+\S)\s*\]\s*$,\\longdirection{[$1]},g;
-	s,\s*[^{]\[\s*([^\]]+\S)\s*\]\s*, \\direction{[$1]} ,g;
-	#s,<brack>,[,g;
-	#s,<cbrack>,],g;
-	s,^\s*([^=]+\S)\s*=\s*(.*\S)\s*,\\line{$1}{$2},smg;
-	s,\.\s*\.\s*\.,\\dots,g;
-	print;
-print "\n\n";
-
+while (<>){
+  m/^\s*\w+\s*:/ && next;
+  s,"([^"]*)",\`\`$1",g;
+  s,/([^/]+)/,\\textit{$1},g;
+  s,^\s*\[\s*([^\]]+\S)\s*\]\s*$,\\longdirection{[$1]},g;
+  s,\s*[^{]\[\s*([^\]]+\S)\s*\]\s*, \\direction{[$1]} ,g;
+  s,^\s*([^=]+\S)\s*=\s*(.*\S)\s*,\\line{$1}{$2},smg;
+  s,\.\s*\.\s*\.,\\dots,g;
+  print;
 }
-print q(\end{document}),"\n";
+print qq(\\end{document});
