@@ -102,7 +102,7 @@ class plywood(object):
     self.chars[string.strip(name)] = 1
     if nick is not None:
       self.chars[nick[1:-1]] = 1
-    return r'\textsc{%s} & %s \\%s' % (name, desc, "\n\n")
+    return r'\textsc{%s} & %s \vspace{12pt}\\%s' % (name, desc, "\n\n")
  
   def make_type(self):
     if self.type == '': # We need one

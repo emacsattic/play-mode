@@ -19,6 +19,12 @@
 \newdimen{\directindent}
 \newdimen{\stageindent}
 
+\newlength{\actheadwidth}
+\setlength{\actheadwidth}{\textwidth}
+\addtolength{\actheadwidth}{0.7in}
+
+\addtolength{\headwidth}{\marginparsep}
+\addtolength{\headwidth}{\marginparwidth}
 %%%%%
 %
 % Override LaTeX's mark system to support line break markings
@@ -121,14 +127,22 @@ by\\
 \end{titlepage}}%
 }
 
+\newcommand{\ps@newact}{%
+  \addtolength{\headwidth}{\marginparsep}
+  \addtolength{\headwidth}{\marginparwidth}
+  \renewcommand{\@oddhead}{\kern-6pt\hbox to 0pt{\kern\actheadwidth\kern1em{\bfseries\Roman{act}-\arabic{scene}-\thepage}}}
+  \renewcommand{\@evenhead}{\@oddhead}
+  \renewcommand{\@evenfoot}{}
+  \renewcommand{\@oddfoot}{\@evenfoot}}
+
 \makeatother
 
 \newenvironment{CharList}
 {%
 \begin{titlepage}
-  \begin{center}\textsc{Characters} 
-  \end{center} 
-  \begin{tabular}{@{}p{1.2in}p{4in}}
+  \hskip\nameindent\textsc{Characters}\markbreak{Characters}\par\nopagebreak
+  \vspace{12pt}
+  \begin{tabular}{@{}p{1.2in}p{3.4in}}
 }
 {\end{tabular}\markbreak{}\end{titlepage}}
 
@@ -210,12 +224,15 @@ by\\
 \newcommand{\newscene}{
 \pagebreak\realnewscene}
 
-\newcommand{\realnewscene}{\stepcounter{scene}\begin{bfseries}\begin{center}\thescene\end{center}\end{bfseries}}
+\newcommand{\realnewscene}{
+{\hspace{\nameindent}\stepcounter{scene}\textsc{\thescene}}\vspace{18pt}}
 
 \renewcommand{\theact}{Act \Roman{act}
 }
 \newcommand{\newact}{
-\pagebreak\stepcounter{act}\thispagestyle{empty}\begin{bfseries}\begin{center}\theact\end{center}\end{bfseries}\realnewscene}
+{\pagebreak\hspace{\nameindent}\stepcounter{act}\thispagestyle{newact}\textsc{\theact}}
+
+\vspace{12pt}\realnewscene}
 
 \def\ppar{\addvspace{\baselineskip}\goodbreak}
 
@@ -284,8 +301,6 @@ by\\
 \setlength{\namegap}{0pt}
 
 \setcounter{secnumdepth}{-2}
-\addtolength{\headwidth}{\marginparsep}
-\addtolength{\headwidth}{\marginparwidth}
 
 
 \lhead[\bfseries\thepage]   {\bfseries\thetitle}
