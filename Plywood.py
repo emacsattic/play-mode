@@ -10,7 +10,7 @@ preamble = r'''\documentclass[letterpaper]{article}
 \begin{document}
 '''
 
-class plywood(object):
+class Plywood(object):
 
   def __init__(self, filename):
     self.filename=filename
@@ -189,7 +189,7 @@ class plywood(object):
     self.outfile.close()
     
 if __name__=="__main__":
-  ply=plywood(sys.argv[1])
+  ply=Plywood(sys.argv[1])
   ply.process()
   ply.close()
   ply.makedvi()

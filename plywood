@@ -1,0 +1,15 @@
+#!/usr/bin/python2.2
+#
+# Translate ply files into LaTeX.
+
+import sys
+
+from Plywood import Plywood
+
+if __name__=="__main__":
+  ply=Plywood(sys.argv[1])
+  ply.process()
+  ply.close()
+  ply.makedvi()
+  ply.makepdf()
+
