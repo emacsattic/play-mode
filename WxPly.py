@@ -7,7 +7,7 @@ import sys
 from wxPython.wx import *
 from plywood import plywood
 
-class MyApp(wxApp):
+class WxPly(wxApp):
     def OnInit(self):
       top = wxFrame(NULL, -1, "In August Play Typesetting System")
 
@@ -23,6 +23,6 @@ class MyApp(wxApp):
 
     
 if __name__=="__main__":
-    app=MyApp(0)
+    app=WxPly(0)
     app.MainLoop()
   

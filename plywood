@@ -2,14 +2,21 @@
 #
 # Translate ply files into LaTeX.
 
-import sys
+import sys,os
 
 from Plywood import Plywood
 
 if __name__=="__main__":
-  ply=Plywood(sys.argv[1])
-  ply.process()
-  ply.close()
-  ply.makedvi()
-  ply.makepdf()
-
+  if len(sys.argv):
+    ply=Plywood(sys.argv[1])
+    ply.process()
+    ply.close()
+    ply.makedvi()
+    ply.makepdf()
+    sys.exit(0)
+  try:
+    import WxPly.WxPly
+    app=WxPly.WxPly(0)
+    app.MainLoop()
+  except: 
+    print "Try again."
