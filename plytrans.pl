@@ -5,7 +5,7 @@
 $\=$/="\n\n";
 
 $newfile = $filename = $ARGV[0];
-$newfile =~ s/.ply$/.latex/;
+$newfile =~ s/.ply$/.tex/;
 print $filename, $newfile;
 open(INFILE,"<$filename");
 open(OUTFILE,">$newfile");
