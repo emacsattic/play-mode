@@ -46,15 +46,18 @@ class Plywood:
   def segments(self,infile):
     segs=[]
     accum=""
-    fileg=infile.__iter__()
-    for line in fileg:
+    line=infile.readline()
+    while line:
+      print line
       sline=string.strip(line)
       if sline=='':
         segs.append(accum)
         accum=""
-        while sline=='':
-          sline=string.strip(fileg.next())
+        while sline=='' and line:
+	  line = infile.readline()
+          sline=string.strip(line)
       accum="%s\n%s"%(accum,sline)
+      line=infile.readline()
     segs.append(accum)
     return segs
   #segments = staticmethod(segments)
