@@ -46,10 +46,10 @@ binary: build install
 	dh_installemacsen -i
 	dh_installman -i
 	dh_installinfo -i
+	dh_python
 	dh_installchangelogs  -i
 	dh_link -i
 	dh_compress -i
-	dh_python
 	dh_fixperms -i
 	dh_installdeb -i
 	dh_gencontrol -i
