@@ -11,13 +11,17 @@
 (defvar play-font-lock-keywords
   (let ((kw1 (mapconcat 'identity
                         '("play" "scene" "author" "act" "title")
+                        "\\|"))
+        (kw2 (mapconcat 'identity
+                        '("newact" "newscene")
                         "\\|")))
+
     (list
      ;; keywords
      (cons (concat "\\b\\(" kw1 "\\):") 1)
      ;; block introducing keywords with immediately following colons.
      ;; Yes "except" is in both lists.
-     ;; (cons (concat "\\b\\(" kw2 "\\)[ \n\t(]") 1)
+     (cons (concat "\\\\\\(" kw2 "\\)") 1)
      ;; `as' but only in "import foo as bar"
       ; '("[ \t]*\\(\\bfrom\\b.*\\)?\\bimport\\b.*\\b\\(as\\)\\b" . 2)
      ;; classes
