@@ -1,9 +1,12 @@
 plywood (0.5.5) unstable; urgency=low
 
   * Added ability to split character nicknames on a comma, allowing for more
-    than one nickname per character. 
+    than one nickname per character.
+  * Changed beat marking to use a picture environment and spread over the
+    whole page. Works better for me, but I'm sure there's a better way to do
+    it.  
 
- -- Monty Taylor <mordred@inaugust.com>  Mon, 20 May 2002 20:56:03 -0500
+ -- Monty Taylor <mordred@inaugust.com>  Mon, 27 May 2002 00:02:15 -0500
 
 plywood (0.5.4) unstable; urgency=low
 
