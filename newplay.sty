@@ -9,7 +9,7 @@
 
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{newplay3}[2001/11/04 A LaTeX package for typesetting plays]
+\ProvidesPackage{newplay}[2001/11/04 A LaTeX package for typesetting plays]
 \usepackage{fancyheadings}
 \usepackage[dvips]{color}
 
@@ -91,7 +91,7 @@
 % This is the definition for Standard American style
 
 \long\def\addname#1{%
-\setbox255=\vbox{\begin{center}\textsc{\textbf{\textcolor{grey}{[#1]}}}\end{center}\par\nopagebreak\unvbox255}%
+\setbox255=\vbox{\begin{center}\textsc{\textcolor{grey}{[#1]}}\end{center}\par\nopagebreak\unvbox255}%
 }%
 
 \makeatother
