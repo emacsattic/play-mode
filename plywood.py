@@ -26,6 +26,9 @@ class plywood(object):
     self.do_line = self._do_line
     self.chars={'Very unlikely character name': 1}
     self.make_charlist_re()
+    self.type=''
+    self.act_count=0
+    self.scene_count=0
 
   def segments(infile):
     accum=""
@@ -42,8 +45,10 @@ class plywood(object):
   segments = staticmethod(segments)
 
   
+  amp_re=re.compile(r'\&')
   song_re=re.compile(r'\s*song:\s*(.*\S)\s*$',re.MULTILINE)
   chars_re=re.compile(r'\s*characters?:\s*(.*)',re.MULTILINE|re.DOTALL)
+  type_re=re.compile(r'\s*type:\s*(.*\S)\s*$',re.MULTILINE)
   title_re=re.compile(r'\s*title:\s*(.*\S)\s*$',re.MULTILINE)
   author_re=re.compile(r'\s*author:\s*(.*\S)\s*$',re.MULTILINE)
   setting_re=re.compile(r'\s*(setting|at rise):\s*(.*)\s*$',re.MULTILINE|re.DOTALL|re.IGNORECASE)
@@ -64,8 +69,17 @@ class plywood(object):
 
   def do_title(self,match):
     self.title=match.group(1)
-    return r'\title{%s}' % self.title
-  
+    #return r'\title{%s}' % self.title
+    return ''
+
+  def do_author(self,match):
+    self.author=match.group(1)
+    return ''
+
+  def do_type(self,match):
+    self.type=match.group(1)
+    return ''
+ 
   def _do_line(self,match):
     return r'\line{%s}{%s}' % (match.group(1),match.group(2))
 
@@ -84,20 +98,40 @@ class plywood(object):
 
   def do_char(self,match):
     (name,nick,desc) = [ match.group(f) for f in range(1,4) ]
+    desc = self.amp_re.sub(r'\&',desc)
     self.chars[string.strip(name)] = 1
     if nick is not None:
       self.chars[nick[1:-1]] = 1
-    return "%Character list goes here\n"
+    return r'\textsc{%s} & %s \\%s' % (name, desc, "\n\n")
  
+  def make_type(self):
+    if self.type == '': # We need one
+      acts='acts'
+      type_map=['no','one','two','three','four','five','six']
+      if self.act_count==1:
+        acts='act'
+      if self.act_count > len(type_map):
+        type_map[self.act_count]='many'
+      return 'a play in %s %s' % (type_map[self.act_count],acts)
+    return self.type
+    
   def make_charlist_re(self):
     charlist = string.join(self.chars.keys(),'|')
     self.charlist_re = re.compile(r'(%s)'%charlist,re.MULTILINE)
+
+  def do_new_act(self,match):
+    act_scene=match.group(1)
+    if act_scene == 'act':
+      self.act_count=self.act_count+1
+    else:
+      self.scene_count=self.scene_count+1
+    return  r'\new%s%s' % (act_scene,"\n")
 
   def do_chars(self,match):
     char_section=match.group(1)
     char_section=self.char_entry_re.sub(self.do_char,char_section)
     self.make_charlist_re()
-    return char_section
+    return r'\begin{CharList}%s\end{CharList}' % char_section
 
   def find_chars(self,match):
     dir = self.charlist_re.sub(r'\\textrm{\\textsc{\1}}',match.group(1))
@@ -107,16 +141,17 @@ class plywood(object):
       line = self.chars_re.sub(self.do_chars,line)
       line = self.lyric_re.sub(self.flip_lyric,line)
       line = self.title_re.sub(self.do_title,line)
+      line = self.type_re.sub(self.do_type,line)
       line = self.song_re.sub(r'\\subsection{\1}',line)
-      line = self.author_re.sub(r'\\author{\1}',line)
+      line = self.author_re.sub(self.do_author,line)
       line = self.act_re.sub(r'\section{%s Act \1}' % self.title,line)
-      line = self.new_act_scene_re.sub(r'\\new\1',line)
+      line = self.new_act_scene_re.sub(self.do_new_act,line)
       line = self.scene_re.sub(r'\subsection{Scene \1}',line)
       line = self.double_re.sub(r'``\1"',line)
       line = self.dots_re.sub(r'\dots',line)
       line = self.it_re.sub(r'\\textit{\1}',line)
       line = self.bf_re.sub(r'\\textbf{\1}',line)
-      line = self.long_re.sub(r'\longdirection{\1}',line)
+      line = self.long_re.sub(r'\longdirection{(\1)}',line)
       line = self.direction_re.sub(r' \direction{(\1)}',line)
       line = self.setting_re.sub(r' \stagedirection{\1:}{\2}',line)
       line = self.char_direction_re.sub(self.find_chars,line)
@@ -126,12 +161,16 @@ class plywood(object):
 
   def process(self):
 
+    lines=[]
     print "Generating %s from %s" % (self.newfile, self.filename)
     self.outfile.write(preamble)
-    
     for line in self.segments(self.infile):
-      self.outfile.write("%s\n" % self.replaces(line))
-    self.outfile.write("%s\n" % r'\end{document}')
+      lines.append("%s\n" % self.replaces(line))
+    type=self.make_type()
+    self.outfile.write(r'\title{%s}%s\author{%s}%s\playtitlepage{%s}%s' % (self.title, "\n",self.author, "\n",type,"\n"))
+    for line in lines:
+      self.outfile.write(line)
+    self.outfile.write(r'\end{document}%s' % ( "\n"))
 
   def makedvi(self):
     print "Running LaTeX on %s" % (self.newfile)

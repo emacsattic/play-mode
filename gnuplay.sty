@@ -103,8 +103,34 @@
 
 \newcommand{\thetitle}{\@title}
 \newcommand{\theauthor}{\@author}
+
+\long\def\playtitlepage#1{%
+{\begin{titlepage}
+\vspace*{\stretch{1}}
+\begin{center}
+\large\@title\\%[5mm]
+\vspace{18pt}
+#1\\
+by\\
+\vspace{6pt}
+\@author\\
+\vspace*{\stretch{2}}
+\textsc{\today}
+\markbreak{}
+\end{center}
+\end{titlepage}}%
+}
+
 \makeatother
 
+\newenvironment{CharList}
+{%
+\begin{titlepage}
+  \begin{center}\textsc{Characters} 
+  \end{center} 
+  \begin{tabular}{@{}p{1.2in}p{4in}}
+}
+{\end{tabular}\markbreak{}\end{titlepage}}
 
 % This checks to see if the output page has a line broken across pages
 
@@ -170,7 +196,7 @@
 {\par\leftskip=\directindent\realdirection{#1}\par}}
 
 \long\def\longdirection#1{
-{\par\leftskip=\nameindent\begin{small}{\hangindent=0em\hangafter=1\textrm{#1}}\end{small}\par}
+{\par\leftskip=\directindent\begin{small}\begin{itshape}{\hangindent=0em\hangafter=1#1}\end{itshape}\end{small}\par}
 \addvspace{12pt}
 }
 
