@@ -120,7 +120,9 @@ class Plywood:
     desc = self.amp_re.sub(r'\&',desc)
     self.chars[string.strip(name)] = 1
     if nick is not None:
-      self.chars[nick[1:-1]] = 1
+      nicks = string.split(nick[1:-1],',')
+      for n in nicks:
+        self.chars[string.strip(n)] = 1
     return r'\textsc{%s} & %s \vspace{12pt}\\%s' % (name, desc, "\n\n")
  
   def make_type(self):

@@ -1,3 +1,10 @@
+plywood (0.5.5) unstable; urgency=low
+
+  * Added ability to split character nicknames on a comma, allowing for more
+    than one nickname per character. 
+
+ -- Monty Taylor <mordred@inaugust.com>  Mon, 20 May 2002 20:56:03 -0500
+
 plywood (0.5.4) unstable; urgency=low
 
   * Added a README and AUTHORS file. I suppose I should give props to people.
@@ -6,7 +13,7 @@ plywood (0.5.4) unstable; urgency=low
   * Made plywood use pdflatex by default at the moment, rather than
     latex/dvipdf. In the future (when I'm not at my in-law's) I'd like to add
     options to plywood to produce dvis or pdfs.
-  * Changed use of dvipdfm to dvipdf (closes: #146635)
+  * Changed use of dvipdfm to dvipdf 
 
  -- Monty Taylor <mordred@inaugust.com>  Sat, 11 May 2002 10:48:03 -0500
 
