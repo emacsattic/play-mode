@@ -7,5 +7,5 @@ plywood (0.5.1-1) unstable; urgency=low
     makes no sense without the LaTeX style. But you could use the LaTeX style
     without the python translator or the emacs editing mode. 
 
- -- Monty Taylor <mordred@camelot.inaugust.com>  Sat,  4 May 2002 13:14:25 -0500
+ -- Monty Taylor (Mordred) <mordred@inaugust.com>  Sat,  4 May 2002 13:14:25 -0500
 
