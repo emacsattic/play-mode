@@ -1,3 +1,11 @@
+plywood (0.5.7) unstable; urgency=low
+
+  * Updated to python2.3.
+  * Updated Standards Version to 3.6.1
+  * Updated Debhelper to 4
+
+ -- Monty Taylor <mordred@inaugust.com>  Mon, 25 Aug 2003 22:33:01 -0500
+
 plywood (0.5.6) unstable; urgency=low
 
   * Trying out cvs-buildpackage features. 
