@@ -18,7 +18,7 @@
 from distutils.core import setup
 
 setup (name = "Plywood",
-       version = "0.5.1",
+       version = "0.5.10",
        description = "A system for typing and typesetting plays",
        author = "Monty Taylor",
        author_email = "mordred@inaugust.com",

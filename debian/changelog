@@ -1,3 +1,9 @@
+plywood (0.5.10) unstable; urgency=low
+
+  * Changed build depends to python-dev. (closes: #261060,#259120)
+
+ -- Monty Taylor <mordred@inaugust.com>  Mon, 26 Jul 2004 13:35:26 -0500
+
 plywood (0.5.9) unstable; urgency=low
 
   * Integrated changes from NMU.  (closes: #213112)
