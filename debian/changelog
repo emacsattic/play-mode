@@ -1,6 +1,13 @@
+plywood (0.5.8) unstable; urgency=low
+
+  * Really updated debhelper to 4
+  * Fixed a few other missed things in debian/control.
+
+ -- Monty Taylor <mordred@inaugust.com>  Tue, 26 Aug 2003 10:54:17 -0500
+
 plywood (0.5.7) unstable; urgency=low
 
-  * Updated to python2.3.
+  * Updated to python2.3. (closes: #198015)
   * Updated Standards Version to 3.6.1
   * Updated Debhelper to 4
 

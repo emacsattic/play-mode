@@ -2,12 +2,12 @@ Source: plywood
 Section: text
 Priority: optional
 Maintainer: Monty Taylor <mordred@inaugust.com>
-Build-Depends-Indep: debhelper (>> 3.0.0), python2.3-dev 
+Build-Depends-Indep: debhelper (>= 4.1), python2.3-dev 
 Standards-Version: 3.6.1
 
 Package: plywood
 Architecture: all
-Depends: tetex-extra (>= 1.0.2), python (>> 2.3.0)
+Depends: tetex-extra (>= 1.0.2), python (>= 2.3.0)
 Suggests: pdf-viewer, postscript-viewer, gs
 Recommends: plywood-elisp
 Description: Playwriting typing and typesetting help
