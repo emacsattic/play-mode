@@ -8,6 +8,6 @@ setup (name = "Plywood",
        url = "http://inaugust.com/",
 
        py_modules = ['Plywood','WxPly'],
-       scripts = ['plywood'],
+       scripts = ['plywood','plywood.real'],
 
       )

@@ -1,3 +1,19 @@
+plywood (0.5.1-2) unstable; urgency=low
+
+  * plywood now no longer starts with #!/usr/bin/python2.2
+  * Fixed maintainer field in debian/control
+  * Removed debian/python-plywood.files for lintian
+  * Cleaned out extraneous files in debian
+  * Added COPYING file
+  * Put better text in debian/copyright
+  * Fixed the man page a little
+  * plywood no longer depends on python-plywood or plywood-elisp. Rather, it
+    recommends them.
+  * Added python2.2 to build-depends
+  * Made long descriptions more descriptive
+
+ -- Monty Taylor (Mordred) <mordred@inaugust.com>  Tue,  7 May 2002 17:36:45 -0500
+
 plywood (0.5.1-1) unstable; urgency=low
 
   * Initial Release.
