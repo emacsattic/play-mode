@@ -15,6 +15,9 @@
 
 \definecolor{grey}{gray}{0.40}
 
+\newdimen{\nameindent}
+\newdimen{\directindent}
+
 %%%%%
 %
 % Override LaTeX's mark system to support line break markings
@@ -91,7 +94,7 @@
 % This is the definition for Standard American style
 
 \long\def\addname#1{%
-\setbox255=\vbox{\begin{center}\textsc{\textcolor{grey}{[#1]}}\end{center}\par\nopagebreak\unvbox255}%
+\setbox255=\vbox{\leftskip=0pt\hskip\nameindent{\normalsize\rmfamily\mdseries\scshape\textcolor{grey}{[#1]}}\endgraf\unvbox255}%
 }%
 
 \makeatother
@@ -142,12 +145,13 @@
 
 % Standard American:
 
-\def\line#1#2
+\long\def\line#1#2
 {
 \pagebreak[2]
-\begin{center}\textsc{\textbf{\markbreak{#1}#1}}\end{center}\par\nopagebreak
+\hskip\nameindent\textsc{\textbf{#1}}\markbreak{#1}\par\nopagebreak
 #2\par
 \markbreak{}
+\addvspace{12pt}
 }
 
 \long\def\realdirection#1{
@@ -157,10 +161,12 @@
 %%\begin{sffamily}\begin{small}\textcolor{grey}{#1}\end{small}\end{sffamily}}
 
 \long\def\direction#1{
-\begin{quote}\realdirection{#1}\end{quote}}
+{\par\leftskip=\directindent\realdirection{#1}\par}}
 
 \long\def\longdirection#1{
-\begin{quote}\realdirection{#1}\end{quote}}
+{\par\leftskip=\directindent\realdirection{#1}\par}
+\addvspace{12pt}
+}
 
 \newcounter{act}
 \newcounter{scene}[act]
@@ -182,6 +188,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \pagestyle{fancyplain}
+
+\nameindent=2.125in
+\directindent=0.5\nameindent
 
 \setcounter{secnumdepth}{-2}
 \addtolength{\headwidth}{\marginparsep}
