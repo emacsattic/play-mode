@@ -193,6 +193,10 @@ class Plywood:
       self.outfile.write(line)
     self.outfile.write(r'\end{document}%s' % ( "\n"))
 
+  def pdflatex(self):
+    print "Running pdfLaTeX on %s" % (self.newfile)
+    os.system('pdflatex %s' % (self.newfile))
+
   def makedvi(self):
     print "Running LaTeX on %s" % (self.newfile)
     os.system('latex %s' % (self.newfile))
@@ -201,7 +205,7 @@ class Plywood:
     dvi=string.join((self.basename,'dvi'),'.')
     pdf=string.join((self.basename,'pdf'),'.')
     print "Creating %s" % (pdf)
-    os.system('dvipdfm -o %s %s' % (pdf,dvi))
+    os.system('dvipdf -o %s %s' % (pdf,dvi))
     
   def close(self):
     self.infile.close()
@@ -211,7 +215,6 @@ if __name__=="__main__":
   ply=Plywood(sys.argv[1])
   ply.process()
   ply.close()
-  ply.makedvi()
-  ply.makepdf()
+  ply.pdflatex()
 
   

@@ -26,8 +26,8 @@ if len(sys.argv):
   ply.process()
   ply.close()
   ply.makedvi()
-  ply.makepdf()
-  sys.exit(0)
+  ply.pdflatex() # I know this is redundant, but I don't have time to do the
+  sys.exit(0)     # Other thing I want to do right now
 try:
   import WxPly.WxPly
   app=WxPly.WxPly(0)
