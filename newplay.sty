@@ -1,6 +1,10 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{newplay}[2001/11/04 A LaTeX package for typesetting plays]
 \usepackage{fancyheadings}
+\usepackage[dvips]{color}
+
+\definecolor{grey}{gray}{0.40}
+
 %%%%%
 %
 % Override LaTeX's mark system to support line break markings
@@ -54,8 +58,6 @@
 \def\rightmark{\expandafter\@rightmark\firstmark{}{}{}}
 \def\@themark{{}{}{}}
 
-\makeatother
-
 % Override the output routine.
 
 \edef\oldoutput{\the\output}%
@@ -63,14 +65,35 @@
 % This adds a symbol to the output page
 
 \def\addtell{%
-\setbox255=\vbox{\unvbox255\kern-6pt\hbox to 0pt{\kern\textwidth\kern1em$\triangleright$}}}%
+\setbox255=\vbox{\unvbox255\kern-6pt\hbox to 0pt{\kern\textwidth\kern1em$\triangleright$}}%
+}%
+
+\def\addname#1{%
+\setbox1=\hbox{\textsc{X}}% Find capheight for intelligent guessing
+\setbox0=\hbox{\textsc{[#1]  }}%
+\setlength{\nameoutdent}{\wd0}%
+\addtolength{\nameoutdent}{\namegap}%
+\setbox255=\vbox{\kern3pt\kern\ht1\kern-\ht0\vbox to 0pt{\hbox to 0pt{\kern-\nameoutdent\hbox to \nameoutdent{\textcolor{grey}{\copy0}\hfil}}}\kern-3pt\kern-\ht1\kern\ht0\kern-\dp0\nointerlineskip\unvbox255}%
+}%
+
+\makeatother
+
 
 % This checks to see if the output page has a line broken across pages
 
 \def\contcheck#1#2#3\end{\def\next{#3}\ifx\next\empty\else\addtell\fi}%
 
+% Check if top of the page has the second part of a continued line
+
+\def\secondcontcheck#1#2#3\end{\def\next{#3}\ifx\next\empty\else\addname{#3}\fi}%
+
+% The topmark on the first page isn't going to match out {}{}{} pattern,
+% So we check to see if it is void first
+
+\def\safemarkcheck#1\end{\def\next{#1}\ifx\next\empty\else\expandafter\secondcontcheck#1\end\fi}%
+
 % The new output routine
-\output={\expandafter\contcheck\botmark\end\oldoutput}%
+\output={\expandafter\contcheck\botmark\end\expandafter\safemarkcheck\topmark\end\oldoutput}%
 
 %
 % End support for line break markings
@@ -92,7 +115,7 @@
   \setbox0=\hbox{\textsc{#1  }}
   \setlength{\nameoutdent}{\wd0}
   \addtolength{\nameoutdent}{\namegap}
-  \leavevmode\kern-\nameoutdent\hbox to \nameoutdent{\box0\hfil}\markbreak{middleofline}#2
+  \leavevmode\kern-\nameoutdent\hbox to \nameoutdent{\box0\hfil}\markbreak{#1}#2
   \par
   \markbreak{}
 }
@@ -119,12 +142,9 @@
     {\markboth{#1}{}\thispagestyle{empty}}
 \renewcommand{\subsectionmark}[1]%
     {\markright{#1}}
-\lhead[\fancyplain{}{\bfseries\thepage}]%
-      {\fancyplain{}{\bfseries\rightmark}}
-\chead[\fancyplain{}{\bfseries\leftmark}]%
-      {\fancyplain{}{\bfseries\leftmark}}
-\rhead[\fancyplain{}{\bfseries\rightmark}]%
-      {\fancyplain{}{\bfseries\thepage}}
+\lhead[\fancyplain{}{\bfseries\thepage}]   {\fancyplain{}{\bfseries\rightmark}}
+\chead[\fancyplain{}{\bfseries\leftmark}]  {\fancyplain{}{\bfseries\leftmark}}
+\rhead[\fancyplain{}{\bfseries\rightmark}] {\fancyplain{}{\bfseries\thepage}}
 
 \cfoot[]{}
 
