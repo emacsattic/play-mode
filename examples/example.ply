@@ -1,0 +1,35 @@
+title: An Example Play
+author: Monty Taylor
+
+characters:
+Monty Taylor (Monty) - A playwright, whom people sometimes call Monty, rather than spell out his whole name. At the moment, descriptions of him are not allowed to contain line breaks. 
+Peter Brook - A late director whose work in the theatre Monty quite enjoys. 
+
+newact:
+
+setting: A small, dark, cramped room. A desk sits in one corner,
+littered with papers. There are probably things living in the mess,
+but finding them seems a bit scary. At least line breaks are handled
+properly in other places other than the character list.
+
+at rise: Monty sits at his keyboard typing. He's not really a very
+good playwright. In fact, he's a director, but when he does have to
+type in plays, he's really annoyed with having to format them as he
+types. rms enters from out of nowhere, and starts speaking in a manner
+resembling a greek chorus.
+
+
+Monty = [sighing] I wish there were an easier way to type
+plays. Typewriters were so much quicker and easier than
+word-processors. [having an idea] Oh wait, there's emacs! And LaTeX. I bet 
+the two of them could do things other playwriting programs could only dream of.
+
+[Monty gets up and leaves, because writing plays really isn't his strong suit.]
+
+newscene:
+
+[Peter Brook enters, moving rather slowly because he's dead.] 
+
+Peter Brook = This is the worst play I've ever read.
+
+[blackout]
