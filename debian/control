@@ -9,7 +9,7 @@ Package: plywood
 Architecture: all
 Depends: tetex-extra (>= 1.0.2)
 Suggests: pdf-viewer, postscript-viewer, gs
-Recommends: python,plywood, plywood-elisp
+Recommends: python-plywood, plywood-elisp
 Description: Playwriting typing and typesetting help.
  The plywood project is a project to help type and typeset plays. It comprises 
  a small structured-text format, an Emacs mode, a translation program and a 
@@ -38,7 +38,7 @@ Description: Python libraries and scripts for the translation of .ply files.
  LaTeX style. The goals are:
  .
  python-plywood provides a library and a program to translate files from the
- .ply structured text format to LaTeX.
+ plywood structured text format to LaTeX.
 
 Package: plywood-elisp
 Architecture: all
