@@ -3,12 +3,12 @@ plywood (0.5.4) unstable; urgency=low
   * Added a README and AUTHORS file. I suppose I should give props to people.
   * Added plywood.postinst. I had one of these once, I guess I just missed
     adding it to CVS. Weird.
-  * Changed use of dvipdfm to dvipdf (don't know why I was using it)
   * Made plywood use pdflatex by default at the moment, rather than
     latex/dvipdf. In the future (when I'm not at my in-law's) I'd like to add
-    options to plywood to produce dvis or pdfs. 
+    options to plywood to produce dvis or pdfs.
+  * Changed use of dvipdfm to dvipdf (closes: #146635)
 
- -- Monty Taylor <mordred@inaugust.com>  Sat, 11 May 2002 09:48:55 -0500
+ -- Monty Taylor <mordred@inaugust.com>  Sat, 11 May 2002 10:48:03 -0500
 
 plywood (0.5.3) unstable; urgency=low
 
