@@ -19,27 +19,19 @@
 
 import sys,os
 
-if sys.version_info[0] > 1 and sys.version_info[1] > 1:
-  # We need python version 2.2 or higher
-  from Plywood import Plywood
+from Plywood import Plywood
 
-  if len(sys.argv):
-    ply=Plywood(sys.argv[1])
-    ply.process()
-    ply.close()
-    ply.makedvi()
-    ply.makepdf()
-    sys.exit(0)
-  try:
-    import WxPly.WxPly
-    app=WxPly.WxPly(0)
-    app.MainLoop()
-  except: 
-    print "Try again."
-
-else:
-  try:
-    sys.execl('python2.2 %s' % sys.argv[0],sys.argv[1:])
-  except:
-    print "Plywood requires python 2.2 or higher."
+if len(sys.argv):
+  ply=Plywood(sys.argv[1])
+  ply.process()
+  ply.close()
+  ply.makedvi()
+  ply.makepdf()
+  sys.exit(0)
+try:
+  import WxPly.WxPly
+  app=WxPly.WxPly(0)
+  app.MainLoop()
+except: 
+  print "Try again."
 
