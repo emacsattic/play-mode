@@ -239,12 +239,13 @@ by\\
 \newcounter{scene}[act]
 \newcounter{beat}[scene]
 
-\newcommand{\beat}{\stepcounter{beat}
-\mbox{}\marginpar{\raggedleft\arabic{scene}-\arabic{beat}}
+\newcommand{\beat}{%\stepcounter{beat}
+%\mbox{}\marginpar{\raggedleft\arabic{scene}-\arabic{beat}}
 \begin{picture}(720,12)(0,8)
 \linethickness{0.5pt}
 \put(0,5){\qbezier(-200,0)(360,0)(720,0)}
-\end{picture}}
+\end{picture}
+\\}
 
 \renewcommand{\thescene}{Scene \arabic{scene}}
 \newcommand{\newscene}{
