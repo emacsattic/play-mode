@@ -2,8 +2,9 @@ plywood (0.5.9) unstable; urgency=low
 
   * Dont install compiled python files.
   * Made depends stricter.
+  * Using dh_python more effectively now.  (closes: #198015)
 
- -- Monty Taylor <mordred@inaugust.com>  Wed, 27 Aug 2003 12:20:15 -0500
+ -- Monty Taylor <mordred@inaugust.com>  Wed, 27 Aug 2003 12:41:14 -0500
 
 plywood (0.5.8) unstable; urgency=low
 
