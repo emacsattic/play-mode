@@ -1,0 +1,137 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{newplay}[2001/11/04 A LaTeX package for typesetting plays]
+\usepackage{fancyheadings}
+%%%%%
+%
+% Override LaTeX's mark system to support line break markings
+%
+
+% LaTeX uses TeX's \mark to store two marks, the left and the right mark.
+% We extend that system to store a third mark - the break mark.  The \line
+% macro sets the break mark _around_ a line of dialog, and then clears it
+% after it is done.  So the break mark will only be set at output time if
+% a line of dialog has been split across pages.  A new output routine tests
+% for this and places a symbol on the output page indicating the line break.
+
+% This method for detecting line breaks by setting marks and testing for
+% them in the output routine is based on Exercise 23.6 in The TeXbook by
+% Donald E. Knuth.
+
+\makeatletter
+
+% Support for extracting any of the three marks
+
+\long\def\@firstofthree#1#2#3{#1}
+\long\def\@secondofthree#1#2#3{#2}
+%\long\def\@thirdofthree#1#2#3{#3}   % this definition already exists
+
+\let\@leftmark\@firstofthree
+\let\@rightmark\@secondofthree
+\let\@breakmark\@thirdofthree
+
+% New definition of markboth and markright, to preserve the 
+% third mark (line break)
+
+\def\markboth#1#2{{\let\protect\@unexpandable@protect
+     \let\label\relax \let\index\relax \let\glossary\relax
+     \expandafter\@markboth\@themark
+     {#1}{#2}\mark{\@themark}}\if@nobreak\ifvmode\nobreak\fi\fi}
+\def\@markboth#1#2#3#4#5{\gdef\@themark{{#4}{#5}{#3}}}
+\def\markright#1{{\let\protect\@unexpandable@protect
+     \let\label\relax \let\index\relax \let\glossary\relax
+     \expandafter\@markright\@themark
+     {#1}\mark{\@themark}}\if@nobreak\ifvmode\nobreak\fi\fi}
+\def\@markright#1#2#3#4{\gdef\@themark{{#1}{#4}{#3}}}
+
+% New macro to set the line break mark
+
+\def\markbreak#1{{\let\protect\@unexpandable@protect
+     \let\label\relax \let\index\relax \let\glossary\relax
+     \expandafter\@markbreak\@themark
+     {#1}\mark{\@themark}}\if@nobreak\ifvmode\nobreak\fi\fi}
+\def\@markbreak#1#2#3#4{\gdef\@themark{{#1}{#2}{#4}}}
+\def\leftmark{\expandafter\@leftmark\botmark{}{}{}}
+\def\rightmark{\expandafter\@rightmark\firstmark{}{}{}}
+\def\@themark{{}{}{}}
+
+\makeatother
+
+% Override the output routine.
+
+\edef\oldoutput{\the\output}%
+
+% This adds a symbol to the output page
+
+\def\addtell{%
+\setbox255=\vbox{\unvbox255\kern-6pt\hbox to 0pt{\kern\textwidth\kern1em$\triangleright$}}}%
+
+% This checks to see if the output page has a line broken across pages
+
+\def\contcheck#1#2#3\end{\def\next{#3}\ifx\next\empty\else\addtell\fi}%
+
+% The new output routine
+\output={\expandafter\contcheck\botmark\end\oldoutput}%
+
+%
+% End support for line break markings
+%
+%%%%%
+
+
+% Needed for \line version 3
+\newlength{\nameoutdent}
+
+% Set to whatever length you want the gap to be
+\newlength{\namegap}
+\setlength{\namegap}{0pt}
+
+% A line of dialog:
+
+\def\line#1#2
+{
+  \setbox0=\hbox{\textsc{#1  }}
+  \setlength{\nameoutdent}{\wd0}
+  \addtolength{\nameoutdent}{\namegap}
+  \leavevmode\kern-\nameoutdent\hbox to \nameoutdent{\box0\hfil}\markbreak{middleofline}#2
+  \par
+  \markbreak{}
+}
+
+\long\def\direction#1{
+\begin{sffamily}\begin{bfseries}\begin{small}#1\end{small}\end{bfseries}\end{sffamily}}
+
+\long\def\longdirection#1{
+\begin{quote}\direction{#1}\end{quote}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% End definitions, begin customization:
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pagestyle{fancyplain}
+
+\setcounter{secnumdepth}{-2}
+\addtolength{\headwidth}{\marginparsep}
+\addtolength{\headwidth}{\marginparwidth}
+\renewcommand{\sectionmark}[1]%
+    {\markboth{#1}{}\thispagestyle{empty}}
+\renewcommand{\subsectionmark}[1]%
+    {\markright{#1}}
+\lhead[\fancyplain{}{\bfseries\thepage}]%
+      {\fancyplain{}{\bfseries\rightmark}}
+\chead[\fancyplain{}{\bfseries\leftmark}]%
+      {\fancyplain{}{\bfseries\leftmark}}
+\rhead[\fancyplain{}{\bfseries\rightmark}]%
+      {\fancyplain{}{\bfseries\thepage}}
+
+\cfoot[]{}
+
+\parindent 0pt
+
+\setlength{\namegap}{0pt}
+
+% Need to look at this one again.
+% I'm not sure which way I like it.
+%\reversemarginpar
