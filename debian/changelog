@@ -1,3 +1,9 @@
+plywood (0.5.6) unstable; urgency=low
+
+  * Trying out cvs-buildpackage features. 
+
+ -- Monty Taylor <mordred@windkey>  Mon, 26 May 2003 13:46:02 -0400
+
 plywood (0.5.5) unstable; urgency=low
 
   * Added ability to split character nicknames on a comma, allowing for more
