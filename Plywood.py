@@ -63,7 +63,7 @@ class Plywood:
 
   
   amp_re=re.compile(r'\&')
-  beat_re=re.compile(r' --beat-- ',re.MULTILINE)
+  beat_re=re.compile(r'--beat--',re.MULTILINE)
   song_re=re.compile(r'\s*song:\s*(.*\S)\s*$',re.MULTILINE)
   chars_re=re.compile(r'\s*characters?:\s*(.*)',re.MULTILINE|re.DOTALL)
   type_re=re.compile(r'\s*type:\s*(.*\S)\s*$',re.MULTILINE)
