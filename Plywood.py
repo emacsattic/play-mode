@@ -23,7 +23,7 @@ preamble = r'''\documentclass[letterpaper]{article}
 \begin{document}
 '''
 
-class Plywood(object):
+class Plywood:
 
   def __init__(self, filename):
     self.filename=filename
