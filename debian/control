@@ -7,7 +7,8 @@ Standards-Version: 3.5.2
 
 Package: plywood
 Architecture: any
-Depends: python-plywood, plywood-elisp
+Depends: python-plywood, plywood-elisp,tetex-extra (>= 1.0.2), gs
+Suggests: pdf-viewer, postscript-viewer
 Description: Playwriting typing and typesetting help.
  The plywood project is a project to help type and typeset plays. It comprises 
  a small structured-text format, an Emacs mode, a translation program and a 

@@ -2,7 +2,10 @@ plywood (0.5.1-1) unstable; urgency=low
 
   * Initial Release.
   * Fixed depends to depend on python2.2, not python
-  * I think I'm going to install under /usr now. :) 
+  * I think I'm going to install under /usr now. :)
+  * Added in the LaTeX style to the base plywood package. The whole thing
+    makes no sense without the LaTeX style. But you could use the LaTeX style
+    without the python translator or the emacs editing mode. 
 
- -- Monty Taylor <mordred@inaugst.com>  Sat,  4 May 2002 12:17:30 -0500
+ -- Monty Taylor <mordred@camelot.inaugust.com>  Sat,  4 May 2002 13:14:25 -0500
 

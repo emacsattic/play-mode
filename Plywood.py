@@ -6,7 +6,7 @@ from __future__ import generators
 import sys,string,re,os
 
 preamble = r'''\documentclass[letterpaper]{article}
-\usepackage{gnuplay}
+\usepackage{plywood}
 \begin{document}
 '''
 

@@ -71,6 +71,7 @@ install: build
 	# Add here commands to install the package into debian/plywood.
 	python2.2 setup.py install --prefix=$(CURDIR)/debian/python-plywood/usr
 	install -m 644 play-mode.el debian/plywood-elisp/usr/share/emacs/site-lisp/plywood-elisp/play-mode.el
+	install -m 644 plywood.sty debian/plywood/usr/share/texmf/tex/latex/plywood/plywood.sty
 	dh_install
 
 # Build architecture-independent files here.
