@@ -64,6 +64,7 @@ class Plywood:
   
   amp_re=re.compile(r'\&')
   beat_re=re.compile(r'--beat--',re.MULTILINE)
+  dotline_re=re.compile(r'^\.$',re.MULTILINE)
   song_re=re.compile(r'\s*song:\s*(.*\S)\s*$',re.MULTILINE)
   chars_re=re.compile(r'\s*characters?:\s*(.*)',re.MULTILINE|re.DOTALL)
   type_re=re.compile(r'\s*type:\s*(.*\S)\s*$',re.MULTILINE)
@@ -87,8 +88,7 @@ class Plywood:
   char_direction_re=re.compile(r'direction\{(.*)\}',re.MULTILINE|re.DOTALL)
 
   def do_title(self,match):
-    self.title=match.group(1)
-    #return r'\title{%s}' % self.title
+    self.title=match.group(1)    #return r'\title{%s}' % self.title
     return ''
 
   def do_author(self,match):
@@ -178,6 +178,7 @@ class Plywood:
       line = self.direction_re.sub(r' \direction{(\1)}',line)
       line = self.setting_re.sub(r' \stagedirection{\1:}{\2}',line)
       line = self.char_direction_re.sub(self.find_chars,line)
+      line = self.dotline_re.sub('\n',line)
       line = self.line_re.sub(self.do_line,line)
       return line
     
