@@ -45,7 +45,7 @@ build-indep-stamp:
 	#  anything for this package.
 	#/usr/bin/docbook-to-man debian/plywood.sgml > plywood.1
 
-	python2.2 setup.py build
+	python setup.py build
 	cvs2cl
 	touch build-indep-stamp
 
@@ -57,7 +57,7 @@ clean:
 	rm -f build-stamp configure-stamp build-indep-stamp build-arch-stamp ChangeLog
 
 	# Add here commands to clean up after the build process.
-	python2.2 setup.py clean --all
+	python setup.py clean --all
 
 	dh_clean
 
@@ -69,9 +69,10 @@ install: build
 	dh_installdirs
 
 	# Add here commands to install the package into debian/plywood.
-	python2.2 setup.py install --prefix=$(CURDIR)/debian/python-plywood/usr
+	python setup.py install --prefix=$(CURDIR)/debian/plywood/usr
 	install -m 644 play-mode.el debian/plywood-elisp/usr/share/emacs/site-lisp/plywood-elisp/play-mode.el
 	install -m 644 plywood.sty debian/plywood/usr/share/texmf/tex/latex/plywood/plywood.sty
+	install -m 755 plywood debian/plywood/usr/bin/plywood
 	dh_install
 
 # Build architecture-independent files here.

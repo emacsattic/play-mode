@@ -16,7 +16,6 @@
 #     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 
-from __future__ import generators
 import sys,string,re,os
 
 preamble = r'''\documentclass[letterpaper]{article}
@@ -44,19 +43,21 @@ class Plywood(object):
     self.act_count=0
     self.scene_count=0
 
-  def segments(infile):
+  def segments(self,infile):
+    segs=[]
     accum=""
     fileg=infile.__iter__()
     for line in fileg:
       sline=string.strip(line)
       if sline=='':
-        yield accum
+        segs.append(accum)
         accum=""
         while sline=='':
           sline=string.strip(fileg.next())
       accum="%s\n%s"%(accum,sline)
-    yield accum
-  segments = staticmethod(segments)
+    segs.append(accum)
+    return segs
+  #segments = staticmethod(segments)
 
   
   amp_re=re.compile(r'\&')

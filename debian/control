@@ -2,14 +2,14 @@ Source: plywood
 Section: text
 Priority: optional
 Maintainer: Monty Taylor <mordred@inaugust.com>
-Build-Depends-Indep: debhelper (>> 3.0.0), python2.2-dev (>>2.2.0), cvs2cl
+Build-Depends-Indep: debhelper (>> 3.0.0), python-dev (>>2.1.0), cvs2cl
 Standards-Version: 3.5.2
 
 Package: plywood
 Architecture: all
-Depends: tetex-extra (>= 1.0.2)
+Depends: tetex-extra (>= 1.0.2), python (>=2.1)
 Suggests: pdf-viewer, postscript-viewer, gs
-Recommends: python-plywood, plywood-elisp
+Recommends: plywood-elisp
 Description: Playwriting typing and typesetting help.
  The plywood project is a project to help type and typeset plays. It comprises 
  a small structured-text format, an Emacs mode, a translation program and a 
@@ -25,20 +25,9 @@ Description: Playwriting typing and typesetting help.
  Currently, we have implemented the Standard American format, as described by 
  Samuel French.
  .
- plywood contains the LaTeX style, which is all you really need to produce
- beautiful plays.
+ plywood contains the LaTeX style, and the plywood script to transform 
+ plays in the plywood format to LaTeX code.
 
-Package: python-plywood
-Architecture: all
-Suggests: plywood, plywood-elisp, xpdf, tetex
-Depends: python2.2 (>= 2.2) 
-Description: Python libraries and scripts for the translation of .ply files.
- The plywood project is a project to help type and typeset plays. It comprises 
- a small structured-text format, an Emacs mode, a translation program and a 
- LaTeX style. The goals are:
- .
- python-plywood provides a library and a program to translate files from the
- plywood structured text format to LaTeX.
 
 Package: plywood-elisp
 Architecture: all

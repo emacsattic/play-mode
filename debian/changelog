@@ -1,9 +1,12 @@
 plywood (0.5.3) unstable; urgency=low
 
   * Debian native packages should not have debian revision numbers.
-  * Moved building code in rules to the arch-indep section. 
+  * Moved building code in rules to the arch-indep section.
+  * Removed python-plywood package. Put python scripts in plywood.
+  * No longer depend on python2.2. Rewrote the code so it should work with 2.1
+    now.
 
- -- Monty Taylor <mordred@inaugust.com>  Wed,  8 May 2002 10:32:28 -0500
+ -- Monty Taylor <mordred@inaugust.com>  Wed,  8 May 2002 10:43:56 -0500
 
 plywood (0.5.2-2) unstable; urgency=low
 
