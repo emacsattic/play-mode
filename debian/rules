@@ -34,7 +34,6 @@ build-arch-stamp:
 	dh_testdir
 
 	# Add here command to compile/build the package.
-	python2.2 setup.py build
 	touch build-arch-stamp
 
 build-indep:  configure-stamp build-indep-stamp
@@ -46,6 +45,8 @@ build-indep-stamp:
 	#  anything for this package.
 	#/usr/bin/docbook-to-man debian/plywood.sgml > plywood.1
 
+	python2.2 setup.py build
+	cvs2cl
 	touch build-indep-stamp
 
 build: build-arch build-indep
@@ -91,7 +92,7 @@ binary-indep: build install
 	dh_installman -i
 	dh_installinfo -i
 #	dh_undocumented -i
-	#dh_installchangelogs  -i
+	dh_installchangelogs  -i
 	dh_link -i
 	dh_compress -i
 	dh_fixperms -i
@@ -118,7 +119,7 @@ binary-arch: build install
 	dh_installman -a
 #	dh_installinfo -a
 #	dh_undocumented -a
-	#dh_installchangelogs  -a
+	dh_installchangelogs  -a
 	dh_strip -a
 	dh_link -a
 	dh_compress -a
