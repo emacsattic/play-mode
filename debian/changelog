@@ -2,9 +2,8 @@ plywood (0.5.9) unstable; urgency=low
 
   * Integrated changes from NMU.  (closes: #213112)
   * Made depends stricter.
-  * 
 
- -- Monty Taylor <mordred@inaugust.com>  Thu, 30 Oct 2003 17:40:45 -0600
+ -- Monty Taylor <mordred@inaugust.com>  Thu, 30 Oct 2003 17:42:11 -0600
 
 plywood (0.5.8.1) unstable; urgency=low
  
