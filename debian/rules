@@ -54,7 +54,7 @@ build: build-arch build-indep
 clean:
 	dh_testdir
 	dh_testroot
-	rm -f build-stamp configure-stamp
+	rm -f build-stamp configure-stamp build-indep-stamp build-arch-stamp
 
 	# Add here commands to clean up after the build process.
 	python2.2 setup.py clean --all
