@@ -46,6 +46,7 @@ class plywood(object):
 
   
   amp_re=re.compile(r'\&')
+  beat_re=re.compile(r'^-beat-',re.MULTILINE)
   song_re=re.compile(r'\s*song:\s*(.*\S)\s*$',re.MULTILINE)
   chars_re=re.compile(r'\s*characters?:\s*(.*)',re.MULTILINE|re.DOTALL)
   type_re=re.compile(r'\s*type:\s*(.*\S)\s*$',re.MULTILINE)
@@ -142,7 +143,8 @@ class plywood(object):
       line = self.lyric_re.sub(self.flip_lyric,line)
       line = self.title_re.sub(self.do_title,line)
       line = self.type_re.sub(self.do_type,line)
-      line = self.song_re.sub(r'\\subsection{\1}',line)
+      line = self.beat_re.sub(r'\\beat ',line)
+      line = self.song_re.sub(r'\subsection{\1}',line)
       line = self.author_re.sub(self.do_author,line)
       line = self.act_re.sub(r'\section{%s Act \1}' % self.title,line)
       line = self.new_act_scene_re.sub(self.do_new_act,line)

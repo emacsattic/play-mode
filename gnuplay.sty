@@ -215,10 +215,14 @@ by\\
 }
 
 \long\def\stagedirection#1#2{
-{\par\leftskip=\stageindent\begin{small}{\parindent=-4em\textsc{#1}\textrm{#2}}\end{small}\par}}
+{\par\leftskip=\stageindent\begin{small}{\parindent=-4em\textsc{#1}\textrm{#2}}\end{small}\par}\vspace{12pt}}
 
 \newcounter{act}
 \newcounter{scene}[act]
+\newcounter{beat}[scene]
+
+\newcommand{\beat}{\stepcounter{beat}
+\mbox{}\marginpar{\raggedleft\arabic{scene}-\arabic{beat}}\HRule}
 
 \renewcommand{\thescene}{Scene \arabic{scene}}
 \newcommand{\newscene}{
@@ -263,7 +267,7 @@ by\\
 \end{sffamily}
 }
 
-\newcommand{\HRule}{\rule{\linewidth}{1mm}}
+\newcommand{\HRule}{\rule{\linewidth}{0.1mm}}
 
 \long\def\titlepg{%
 {\begin{titlepage}
