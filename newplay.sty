@@ -173,12 +173,14 @@
 
 \renewcommand{\thescene}{Scene \arabic{scene}}
 \newcommand{\newscene}{
-\stepcounter{scene}\begin{bfseries}\begin{center}\thescene\end{center}\end{bfseries}}
+\pagebreak\realnewscene}
+
+\newcommand{\realnewscene}{\stepcounter{scene}\begin{bfseries}\begin{center}\thescene\end{center}\end{bfseries}}
 
 \renewcommand{\theact}{Act \Roman{act}
 }
 \newcommand{\newact}{
-\pagebreak\stepcounter{act}\thispagestyle{empty}\begin{bfseries}\begin{center}\theact\end{center}\end{bfseries}\newscene}
+\pagebreak\stepcounter{act}\thispagestyle{empty}\begin{bfseries}\begin{center}\theact\end{center}\end{bfseries}\realnewscene}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
