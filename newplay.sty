@@ -162,6 +162,18 @@
 \long\def\longdirection#1{
 \begin{quote}\realdirection{#1}\end{quote}}
 
+\newcounter{act}
+\newcounter{scene}[act]
+
+\renewcommand{\thescene}{Scene \arabic{scene}}
+\newcommand{\newscene}{
+\stepcounter{scene}\begin{bfseries}\begin{center}\thescene\end{center}\end{bfseries}}
+
+\renewcommand{\theact}{Act \Roman{act}
+}
+\newcommand{\newact}{
+\stepcounter{act}\thispagestyle{empty}\begin{bfseries}\begin{center}\theact\end{center}\end{bfseries}}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -174,12 +186,15 @@
 \setcounter{secnumdepth}{-2}
 \addtolength{\headwidth}{\marginparsep}
 \addtolength{\headwidth}{\marginparwidth}
-\renewcommand{\sectionmark}[1]%
-    {\markboth{#1}{}\thispagestyle{empty}}
-\renewcommand{\subsectionmark}[1]%
-    {\markright{#1}}
-\lhead[\fancyplain{}{\bfseries\thepage}]   {\fancyplain{}{\bfseries\rightmark}}
-\chead[\fancyplain{}{\bfseries\leftmark}]  {\fancyplain{}{\bfseries\leftmark}}
+%\renewcommand{\sectionmark}[1]%
+%    {\markboth{#1}{}\thispagestyle{empty}}
+%\renewcommand{\subsectionmark}[1]%
+%    {\markright{#1}}
+%\lhead[\fancyplain{}{\bfseries\thepage}]   {\fancyplain{}{\bfseries\rightmark}}
+%\chead[\fancyplain{}{\bfseries\leftmark}]  {\fancyplain{}{\bfseries\leftmark}}
+
+\lhead[\fancyplain{}{\bfseries\thepage}]   {\fancyplain{}{\bfseries\thescene}}
+\chead[\fancyplain{}{\bfseries\leftmark}]  {\fancyplain{}{\bfseries\theact}}
 \rhead[\fancyplain{}{\bfseries\rightmark}] {\fancyplain{}{\bfseries\thepage}}
 
 \cfoot[]{}
