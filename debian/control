@@ -7,7 +7,7 @@ Standards-Version: 3.5.2
 
 Package: plywood
 Architecture: all
-Depends: tetex-extra (>= 1.0.2), python (>=2.1)
+Depends: tetex-extra (>= 1.0.2), python (>>2.1.0)
 Suggests: pdf-viewer, postscript-viewer, gs
 Recommends: plywood-elisp
 Description: Playwriting typing and typesetting help.
