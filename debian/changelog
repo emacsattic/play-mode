@@ -1,8 +1,10 @@
 plywood (0.5.3) unstable; urgency=low
 
-  * Debian native packages should not have debian revision numbers. 
+  * Debian native packages should not have debian revision numbers.
+  * Took out cvs2cl -- people without cvs access might actually want to build
+    the package at somepoint (I hope)
 
- -- Monty Taylor <mordred@inaugust.com>  Wed,  8 May 2002 10:10:45 -0500
+ -- Monty Taylor <mordred@inaugust.com>  Wed,  8 May 2002 10:21:51 -0500
 
 plywood (0.5.2-2) unstable; urgency=low
 
