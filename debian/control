@@ -28,7 +28,6 @@ Description: Playwriting typing and typesetting help.
  plywood contains the LaTeX style, and the plywood script to transform 
  plays in the plywood format to LaTeX code.
 
-
 Package: plywood-elisp
 Architecture: all
 Depends: emacs21 | emacs20 | emacsen
