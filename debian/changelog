@@ -3,7 +3,7 @@ plywood (0.5.1-3) unstable; urgency=low
   * Fixed a couple of lintian erros. (Still not sure how I'm going to get
     setup.py to not change the #!/usr/bin/python2.2 line. Hmmm.
 
- -- Monty Taylor (Mordred) <mordred@inaugust.com>  Tue,  7 May 2002 17:55:30 -0500
+ -- Monty Taylor (Mordred) <monty@inaugust.com>  Tue,  7 May 2002 17:55:30 -0500
 
 plywood (0.5.1-2) unstable; urgency=low
 
