@@ -4,13 +4,18 @@
 
 $\=$/="\n\n";
 
-print <<'LaTeX';
+$newfile = $filename = $ARGV[0];
+$newfile =~ s/.ply$/.latex/;
+print $filename, $newfile;
+open(INFILE,"<$filename");
+open(OUTFILE,">$newfile");
+print OUTFILE <<'LaTeX';
 \documentclass[letterpaper]{article}
 \usepackage{newplay}
 \begin{document}
 LaTeX
 
-while (<>){
+while (<INFILE>){
   s,\s*title:\s*(.*\S)\s*$,$title="$1 -"; "\\title{$1}",gem && next;
   s,\s*author:\s*(.*\S)\s*$,\\author{$1},gm && next;
   s/[aA][cC][tT]\:\s*(.*\S)\s*$/\\section{$title Act $1}/mg;
@@ -22,6 +27,6 @@ while (<>){
   s,^\s*\[\s*([^\]]+\S)\s*\]\s*$,\\longdirection{[$1]},g;
   s,\s*[^{]\[\s*([^\]]+\S)\s*\]\s*, \\direction{[$1]} ,g;
   s,^\s*([^=]+\S)\s*=\s*(.*\S)\s*,\\line{$1}{$2},smg;
-  print;
+  print OUTFILE $_;
 }
-print qq(\\end{document});
+print OUTFILE qq(\\end{document});

@@ -1,5 +1,15 @@
+%%%%%%%
+%
+% Things that are changed between Monty-Style and Standard American:
+%
+% \addname
+% \line
+% And the \raggedright invocation at the bottom
+
+
+
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{newplay}[2001/11/04 A LaTeX package for typesetting plays]
+\ProvidesPackage{newplay3}[2001/11/04 A LaTeX package for typesetting plays]
 \usepackage{fancyheadings}
 \usepackage[dvips]{color}
 
@@ -68,12 +78,20 @@
 \setbox255=\vbox{\unvbox255\kern-6pt\hbox to 0pt{\kern\textwidth\kern1em$\triangleright$}}%
 }%
 
-\def\addname#1{%
-\setbox1=\hbox{\textsc{X}}% Find capheight for intelligent guessing
-\setbox0=\hbox{\textsc{[#1]  }}%
-\setlength{\nameoutdent}{\wd0}%
-\addtolength{\nameoutdent}{\namegap}%
-\setbox255=\vbox{\kern3pt\kern\ht1\kern-\ht0\vbox to 0pt{\hbox to 0pt{\kern-\nameoutdent\hbox to \nameoutdent{\textcolor{grey}{\copy0}\hfil}}}\kern-3pt\kern-\ht1\kern\ht0\kern-\dp0\nointerlineskip\unvbox255}%
+% This is the definition to use for Monty-style plays
+
+%% \def\addname#1{%
+%% \setbox1=\hbox{\textsc{X}}% Find capheight for intelligent guessing
+%% \setbox0=\hbox{\textsc{[#1]  }}%
+%% \setlength{\nameoutdent}{\wd0}%
+%% \addtolength{\nameoutdent}{\namegap}%
+%% \setbox255=\vbox{\kern3pt\kern\ht1\kern-\ht0\vbox to 0pt{\hbox to 0pt{\kern-\nameoutdent\hbox to \nameoutdent{\textcolor{grey}{\copy0}\hfil}}}\kern-3pt\kern-\ht1\kern\ht0\kern-\dp0\nointerlineskip\unvbox255}%
+%% }%
+
+% This is the definition for Standard American style
+
+\long\def\addname#1{%
+\setbox255=\vbox{\begin{center}\textsc{\textbf{\textcolor{grey}{[#1]}}}\end{center}\par\nopagebreak\unvbox255}%
 }%
 
 \makeatother
@@ -87,7 +105,7 @@
 
 \def\secondcontcheck#1#2#3\end{\def\next{#3}\ifx\next\empty\else\addname{#3}\fi}%
 
-% The topmark on the first page isn't going to match out {}{}{} pattern,
+% The topmark on the first page isn't going to match our {}{}{} pattern,
 % So we check to see if it is void first
 
 \def\safemarkcheck#1\end{\def\next{#1}\ifx\next\empty\else\expandafter\secondcontcheck#1\end\fi}%
@@ -110,21 +128,39 @@
 
 % A line of dialog:
 
+% Monty-Style:
+
+%%\def\line#1#2
+%%{
+%%  \setbox0=\hbox{\textsc{#1  }}
+%%  \setlength{\nameoutdent}{\wd0}
+%%  \addtolength{\nameoutdent}{\namegap}
+%%  \leavevmode\kern-\nameoutdent\hbox to \nameoutdent{\box0\hfil}\markbreak{#1}#2
+%%  \par
+%%  \markbreak{}
+%%}
+
+% Standard American:
+
 \def\line#1#2
 {
-  \setbox0=\hbox{\textsc{#1  }}
-  \setlength{\nameoutdent}{\wd0}
-  \addtolength{\nameoutdent}{\namegap}
-  \leavevmode\kern-\nameoutdent\hbox to \nameoutdent{\box0\hfil}\markbreak{#1}#2
-  \par
-  \markbreak{}
+\pagebreak[2]
+\begin{center}\textsc{\textbf{\markbreak{#1}#1}}\end{center}\par\nopagebreak
+#2\par
+\markbreak{}
 }
 
-\long\def\direction#1{
+\long\def\realdirection#1{
 \begin{sffamily}\begin{bfseries}\begin{small}#1\end{small}\end{bfseries}\end{sffamily}}
 
+%%\long\def\direction#1{
+%%\begin{sffamily}\begin{small}\textcolor{grey}{#1}\end{small}\end{sffamily}}
+
+\long\def\direction#1{
+\begin{quote}\realdirection{#1}\end{quote}}
+
 \long\def\longdirection#1{
-\begin{quote}\direction{#1}\end{quote}}
+\begin{quote}\realdirection{#1}\end{quote}}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -155,3 +191,11 @@
 % Need to look at this one again.
 % I'm not sure which way I like it.
 %\reversemarginpar
+
+%%%%
+%
+% Ragged right is only for Standard American
+%
+
+%\raggedright
+
