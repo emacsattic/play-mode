@@ -1,9 +1,14 @@
+plywood (0.5.2-2) unstable; urgency=low
+
+  * Added GPL headers to files. 
+
+ -- Monty Taylor <mordred@inaugust.com>  Tue,  7 May 2002 22:49:57 -0500
+
 plywood (0.5.2-1) unstable; urgency=low
 
   * Removed some extraneous files.
   * Intial debian package upload (closes: #146218)
   * Built as a native debian package.
-  * Licensing issues. 
 
  -- Monty Taylor <mordred@inaugust.com>  Tue,  7 May 2002 22:48:17 -0500
 
