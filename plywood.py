@@ -3,10 +3,10 @@
 # Translate ply files into LaTeX.
 
 from __future__ import generators
-import sys,string,re
+import sys,string,re,os
 
 preamble = r'''\documentclass[letterpaper]{article}
-\usepackage{newplay}
+\usepackage{gnuplay}
 \begin{document}
 '''
 
@@ -14,10 +14,13 @@ class plywood(object):
 
   def __init__(self, filename):
     self.filename=filename
-    self.newfile = string.join((filename[:filename.rfind(".ply")],"tex"),".")
+    self.basename = filename[:filename.rfind(".ply")]
+    self.dir= filename[:filename.rfind(os.sep)]
+    os.chdir(self.dir)
+    self.newfile = string.join((self.basename,"tex"),".")
     self.infile=open(self.filename,'r')
     self.outfile=open(self.newfile,'w')
-    
+
   def segments(infile):
     accum=""
     fileg=infile.__iter__()
@@ -73,6 +76,16 @@ class plywood(object):
       self.outfile.write("%s\n" % self.replaces(line))
     self.outfile.write("%s\n" % r'\end{document}')
 
+  def makedvi(self):
+    print "Running LaTeX on %s" % (self.newfile)
+    os.system('latex %s' % (self.newfile))
+
+  def makepdf(self):
+    dvi=string.join((self.basename,'dvi'),'.')
+    pdf=string.join((self.basename,'pdf'),'.')
+    print "Creating %s" % (pdf)
+    os.system('dvipdfm -o %s %s' % (pdf,dvi))
+    
   def close(self):
     self.infile.close()
     self.outfile.close()
@@ -81,4 +94,7 @@ if __name__=="__main__":
   ply=plywood(sys.argv[1])
   ply.process()
   ply.close()
+  ply.makedvi()
+  ply.makepdf()
+
   
