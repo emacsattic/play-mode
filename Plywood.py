@@ -48,7 +48,6 @@ class Plywood:
     accum=""
     line=infile.readline()
     while line:
-      print line
       sline=string.strip(line)
       if sline=='':
         segs.append(accum)
