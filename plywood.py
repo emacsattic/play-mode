@@ -1,9 +1,14 @@
-#!/usr/bin/python
+#!/usr/bin/python2.2
 #
 # Translate ply files into LaTeX.
 
 from __future__ import generators
 import sys,string,re
+
+preamble = r'''\documentclass[letterpaper]{article}
+\usepackage{newplay}
+\begin{document}
+'''
 
 class plywood:
 
@@ -39,8 +44,7 @@ class plywood:
     
   def __init__(self, filename):
     self.filename=filename
-    self.newfile = string.join((filename[:filename.rfind(".ply")],"latex"),".")
-    print self.filename,self.newfile
+    self.newfile = string.join((filename[:filename.rfind(".ply")],"tex"),".")
     self.infile=open(self.filename,'r')
     self.outfile=open(self.newfile,'w')
     
@@ -59,11 +63,9 @@ class plywood:
     
 
   def process(self):
-    self.outfile.write(r'''
-\documentclass[letterpaper]{article}
-\usepackage{newplay}
-\begin{document}
-''')
+
+    print "Generating %s from %s" % (self.newfile, self.filename)
+    self.outfile.write(preamble)
     
     for line in self.segments():
       self.outfile.write("%s\n" % self.replaces(line))
@@ -74,7 +76,6 @@ class plywood:
     self.outfile.close()
     
 if __name__=="__main__":
-  #filename = sys.argv[0]
   ply=plywood(sys.argv[1])
   ply.process()
   ply.close()
