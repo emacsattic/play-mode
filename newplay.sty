@@ -93,8 +93,11 @@
 
 % This is the definition for Standard American style
 
+\def\namelook#1{%
+\begin{rmfamily}\begin{mdseries}\begin{scshape}#1\end{scshape}\end{mdseries}\end{rmfamily}}
+
 \long\def\addname#1{%
-\setbox255=\vbox{\leftskip=0pt\hskip\nameindent{\normalsize\rmfamily\mdseries\scshape\textcolor{grey}{[#1]}}\endgraf\unvbox255}%
+\setbox255=\vbox{\leftskip=0pt\hskip\nameindent{\namelook{\textcolor{grey}{[#1]}}}\endgraf\unvbox255}%
 }%
 
 \makeatother
@@ -155,7 +158,7 @@
 }
 
 \long\def\realdirection#1{
-\begin{sffamily}\begin{bfseries}\begin{small}#1\end{small}\end{bfseries}\end{sffamily}}
+\begin{rmfamily}\begin{itshape}\begin{small}{\hangindent=0em\hangafter=1#1}\end{small}\end{itshape}\end{rmfamily}}
 
 %%\long\def\direction#1{
 %%\begin{sffamily}\begin{small}\textcolor{grey}{#1}\end{small}\end{sffamily}}
@@ -182,6 +185,30 @@
 \newcommand{\newact}{
 \pagebreak\stepcounter{act}\thispagestyle{empty}\begin{bfseries}\begin{center}\theact\end{center}\end{bfseries}\realnewscene}
 
+\def\ppar{\addvspace{\baselineskip}\goodbreak}
+
+\long\def\lyric#1#2
+{
+\def\pskip{\hspace*{1em}}
+\def\dpskip{\hspace*{2em}}
+\pagebreak[2]
+\hskip\nameindent\textsc{#1}\markbreak{#1}\par\nopagebreak
+%\addvspace{12pt plus20pt}\goodbreak
+\bgroup
+\parindent=0pt
+\leftskip=0.5in
+\obeylines
+\hangindent=2em
+\hangafter=1
+%\let\oldpar=\par
+%\def\mypar{\hangindent=2em\hangafter=1\oldpar}
+%\let\par=\mypar\obeylines
+\begin{sffamily}
+#2\par
+\markbreak{}
+\addvspace{12pt}
+\end{sffamily}\egroup\ppar
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
