@@ -70,7 +70,7 @@ install: build
 
 	# Add here commands to install the package into debian/plywood.
 	python2.2 setup.py install --prefix=$(CURDIR)/debian/python-plywood/usr
-	install -m 644 play-mode.el debian/plywood-lisp/usr/share/emacs/site-lisp/plywood-lisp/play-mode.el
+	install -m 644 play-mode.el debian/plywood-elisp/usr/share/emacs/site-lisp/plywood-elisp/play-mode.el
 	dh_install
 
 # Build architecture-independent files here.
@@ -80,7 +80,7 @@ binary-indep: build install
 	dh_testroot -i
 #	dh_installdebconf -i
 	dh_installdocs -i
-#	dh_installexamples -i
+	dh_installexamples -i
 	dh_installmenu -i
 #	dh_installlogrotate -i
 	dh_installemacsen -i
@@ -107,7 +107,7 @@ binary-arch: build install
 	dh_testroot -a
 #	dh_installdebconf -a
 	dh_installdocs -a
-#	dh_installexamples -a
+	dh_installexamples -a
 	dh_installmenu -a
 #	dh_installlogrotate -a
 	dh_installemacsen -a
