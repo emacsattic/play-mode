@@ -6,7 +6,7 @@ Build-Depends: debhelper (>> 3.0.0)
 Standards-Version: 3.5.2
 
 Package: plywood
-Architecture: any
+Architecture: all
 Depends: python-plywood, plywood-elisp,tetex-extra (>= 1.0.2), gs
 Suggests: pdf-viewer, postscript-viewer
 Description: Playwriting typing and typesetting help.
@@ -39,7 +39,7 @@ Description: Python libraries and scripts for the translation of .ply files.
  Samuel French.
 
 Package: plywood-elisp
-Architecture: any
+Architecture: all
 Depends: emacs21 | emacs20 | xemacs2 | emacsen
 Suggests: plywood | python-plywood, xpdf, tetex
 Description: Playwriting typing and typesetting help.

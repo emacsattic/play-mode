@@ -1,5 +1,3 @@
-#!/usr/bin/python2.2
-#
 # Translate ply files into LaTeX.
 
 from __future__ import generators
