@@ -6,25 +6,35 @@ $\=$/="\n\n";
 
 print <<'EO_TeX';
 \documentclass[letterpaper]{article}
-\parindent 0pt
 \usepackage{fancyheadings}
+EO_TeX
 
-\pagestyle{fancy}
+$header = <<'EO_TeX';
+\pagestyle{fancyplain}
+
+\setcounter{secnumdepth}{-2}
 \addtolength{\headwidth}{\marginparsep}
 \addtolength{\headwidth}{\marginparwidth}
-\title{Deathtrap}
+\renewcommand{\sectionmark}[1]%
+    {\markboth{#1}{}\thispagestyle{empty}}
+\renewcommand{\subsectionmark}[1]%
+    {\markright{#1}}
 \lhead[\fancyplain{}{\bfseries\thepage}]%
       {\fancyplain{}{\bfseries\rightmark}}
-\rhead[\fancyplain{}{\bfseries\leftmark}]%
+\chead[\fancyplain{}{\bfseries\leftmark}]%
+      {\fancyplain{}{\bfseries\leftmark}}
+\rhead[\fancyplain{}{\bfseries\rightmark}]%
       {\fancyplain{}{\bfseries\thepage}}
 \cfoot[]{}
-%\pagestyle{headings}
-\begin{document}
-\author{Ira Levin}
-%\pagenumbering{arabic}
-\maketitle
-\reversemarginpar
 
+\parindent 0pt
+
+% Need to look at this one again.
+% I'm not sure which way I like it.
+%\reversemarginpar
+
+\begin{document}
+%\maketitle
 % Needed for \line version 3
 \newlength{\nameoutdent}
 
@@ -53,16 +63,24 @@ print <<'EO_TeX';
 
 \def\direction#1
 {\textsf{\textbf{#1 }}}
+
 EO_TeX
 
+%metakeys={};
+$text="";
 while (<>){
-  m/^\s*\w+\s*:/ && next;
+  s/[aA][cC][tT]\:\s*(.*\S)\s*$/\\section{$metakeys{'title'} - Act $1}/mg;
+  s,[sS][cC][eE][nN][eE]:\s*(.*\S)\s*$,\\subsection{Scene $1},gm;
+  s,\s*(title|author):\s*(.*\S)\s*$,$metakeys{$1}=$2; "",gem && next;
   s,"([^"]*)",\`\`$1",g;
   s,/([^/]+)/,\\textit{$1},g;
   s,^\s*\[\s*([^\]]+\S)\s*\]\s*$,\\longdirection{[$1]},g;
   s,\s*[^{]\[\s*([^\]]+\S)\s*\]\s*, \\direction{[$1]} ,g;
   s,^\s*([^=]+\S)\s*=\s*(.*\S)\s*,\\line{$1}{$2},smg;
   s,\.\s*\.\s*\.,\\dots,g;
-  print;
+  $text.="$_\n\n";
 }
+print "\\title{$metakeys{'title'}}\n\\author{$metakeys{'author'}}\n";
+print $header;
+print $text;
 print qq(\\end{document});
