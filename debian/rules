@@ -31,7 +31,7 @@ install: build
 	dh_installdirs
 
 	# Add here commands to install the package into debian/plywood.
-	python setup.py install --root=debian/plywood --prefix=/usr
+	python setup.py install --no-compile --root=debian/plywood --prefix=/usr
 	install -m 644 play-mode.el debian/plywood-elisp/usr/share/emacs/site-lisp/plywood-elisp/play-mode.el
 	install -m 644 plywood.sty debian/plywood/usr/share/texmf/tex/latex/plywood/plywood.sty
 	install -m 755 plywood debian/plywood/usr/bin/plywood
@@ -49,6 +49,7 @@ binary: build install
 	dh_installchangelogs  -i
 	dh_link -i
 	dh_compress -i
+	dh_python
 	dh_fixperms -i
 	dh_installdeb -i
 	dh_gencontrol -i

@@ -7,7 +7,7 @@ Standards-Version: 3.6.1
 
 Package: plywood
 Architecture: all
-Depends: tetex-extra (>= 1.0.2), python (>= 2.3)
+Depends: tetex-extra (>= 1.0.2), python (>= 2.3), python ( << 2.4)
 Suggests: pdf-viewer, postscript-viewer, gs
 Recommends: plywood-elisp
 Description: Playwriting typing and typesetting help
@@ -36,5 +36,13 @@ Description: Playwriting typing and typesetting help
  The plywood project is a project to help type and typeset plays. It comprises 
  a small structured-text format, an Emacs mode, a translation program and a 
  LaTeX style. The goals are:
+ .
+ 1) Reduce the work of the playwright to that of writing a play. Even 
+ learning special key strokes is discouraged -- the system should DWIM.
+ . 
+ 2) Make the plays pretty, yet conforming to standard formatting rules. 
+ . 
+ Currently, we have implemented the Standard American format, as described by 
+ Samuel French.
  .
  plywood-elisp contains a major mode for editing .ply files.
