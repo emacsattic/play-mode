@@ -1,10 +1,17 @@
 plywood (0.5.9) unstable; urgency=low
 
-  * Dont install compiled python files.
+  * Integrated changes from NMU.  (closes: #198015)
   * Made depends stricter.
-  * Using dh_python more effectively now.  (closes: #198015)
 
- -- Monty Taylor <mordred@inaugust.com>  Wed, 27 Aug 2003 12:41:14 -0500
+ -- Monty Taylor <mordred@inaugust.com>  Thu, 30 Oct 2003 17:31:51 -0600
+
+plywood (0.5.8.1) unstable; urgency=low
+ 
+   * NMU.
+   * Fix python dependency (closes: #198015).
+      
+ -- Matthias Klose <doko@debian.org>  Sun, 28 Sep 2003 14:48:04 +0200
+        
 
 plywood (0.5.8) unstable; urgency=low
 
