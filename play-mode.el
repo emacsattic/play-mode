@@ -8,9 +8,27 @@
   (modify-syntax-entry ?[ "<" play-mode-syntax-table)
                        (modify-syntax-entry ?] ">" play-mode-syntax-table)
   )
+
+(defun play-translate-file ()
+  "Run the current file through plytrans and latex"
+  (interactive)
+  (and (buffer-modified-p) 
+       (and (y-or-n-p (concat "Save " (buffer-file-name) " first ?"))
+            (save-buffer)))
+  (call-process "plywood" nil "*plywood-out*" nil (buffer-file-name))
+)
+
+(defun play-view-pdf ()
+  "View the pdf related to the current file."
+  (interactive)
+  (play-translate-file)
+  (start-process "xpdf" "*plywood-out*" "xpdf" (concat (file-name-sans-extension (buffer-file-name)) ".pdf") 
+))
+
+
 (defvar play-font-lock-keywords
   (let ((kw1 (mapconcat 'identity
-                        '("play" "scene" "author" "act" "title")
+                        '("play" "scene" "author" "act" "title" "lyrics?" "lines?" "newact" "newscene" "characters" "[Ss]etting" "[Aa]t [Rr]ise" "song")
                         "\\|"))
         (kw2 (mapconcat 'identity
                         '("newact" "newscene")
@@ -34,12 +52,40 @@
     "Additional expressions to highlight in Play mode.")
   (put 'play-mode 'font-lock-defaults '(play-font-lock-keywords))
   
-  (defun play-mode ()
+(defun new-play ()
+  (interactive) 
+  (save-buffer))
+
+(define-key menu-bar-file-menu [new-play]
+  '("New Play" . new-play))
+
+;;(defvar menu-bar-play-menu (make-sparse-keymap "Play"))
+;; (define-key menu-bar-play-menu [play-translate-file]
+;;   '("Translate Play" . play-translate-file))
+;; (define-key menu-bar-menu [play]
+;;   (cons "Play" menu-bar-play-menu))
+
+(defvar play-mode-map (make-sparse-keymap))
+(define-key play-mode-map [menu-bar play]
+  (cons "Play" (make-sparse-keymap "Play")))
+
+;; Define specific subcommands in this menu.
+(define-key play-mode-map
+  [menu-bar play translate-file]
+  '("Translate play" . play-translate-file))
+(define-key play-mode-map
+  [menu-bar play view-pdf]
+  '("Preview play" . play-view-pdf))
+(defun play-mode ()
     "Major mode for editing plays."
     (interactive)
     (kill-all-local-variables)
+    (use-local-map play-mode-map)
+    (local-set-key "\C-c\C-c" 'play-translate-file)
+    (local-set-key "\C-c\C-v" 'play-view-pdf)
+    (make-local-variable 'play-translate-file)
     (make-local-variable 'font-lock-defaults)
-  (make-local-variable 'paragraph-separate)
+      (make-local-variable 'paragraph-separate)
   (make-local-variable 'paragraph-start)
   (make-local-variable 'require-final-newline)
 ;  (make-local-variable 'comment-start)

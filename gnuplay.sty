@@ -17,6 +17,7 @@
 
 \newdimen{\nameindent}
 \newdimen{\directindent}
+\newdimen{\stageindent}
 
 %%%%%
 %
@@ -100,6 +101,8 @@
 \setbox255=\vbox{\leftskip=0pt\hskip\nameindent{\namelook{\textcolor{grey}{[#1]}}}\endgraf\unvbox255}%
 }%
 
+\newcommand{\thetitle}{\@title}
+\newcommand{\theauthor}{\@author}
 \makeatother
 
 
@@ -167,9 +170,12 @@
 {\par\leftskip=\directindent\realdirection{#1}\par}}
 
 \long\def\longdirection#1{
-{\par\leftskip=\directindent\realdirection{#1}\par}
+{\par\leftskip=\nameindent\begin{small}{\hangindent=0em\hangafter=1\textrm{#1}}\end{small}\par}
 \addvspace{12pt}
 }
+
+\long\def\stagedirection#1#2{
+{\par\leftskip=\stageindent\begin{small}{\parindent=-4em\textsc{#1}\textrm{#2}}\end{small}\par}}
 
 \newcounter{act}
 \newcounter{scene}[act]
@@ -189,12 +195,17 @@
 
 \long\def\lyric#1#2
 {
-\def\pskip{\hspace*{1em}}
-\def\dpskip{\hspace*{2em}}
 \pagebreak[2]
 \hskip\nameindent\textsc{#1}\markbreak{#1}\par\nopagebreak
-%\addvspace{12pt plus20pt}\goodbreak
 \bgroup
+\reallyric{#2\par}
+\markbreak{}\egroup\ppar}
+
+\long\def\reallyric#1
+{
+\def\pskip{\hspace*{1em}}
+\def\dpskip{\hspace*{2em}}
+%\addvspace{12pt plus20pt}\goodbreak
 \parindent=0pt
 \leftskip=0.5in
 \obeylines
@@ -204,11 +215,30 @@
 %\def\mypar{\hangindent=2em\hangafter=1\oldpar}
 %\let\par=\mypar\obeylines
 \begin{sffamily}
-#2\par
-\markbreak{}
+#1
 \addvspace{12pt}
-\end{sffamily}\egroup\ppar
+\end{sffamily}
 }
+
+\newcommand{\HRule}{\rule{\linewidth}{1mm}}
+
+\long\def\titlepg{%
+{\begin{titlepage}
+\vspace*{\stretch{1}}
+\begin{flushright}
+\HRule\\
+  \Huge\thetitle\\[5mm]
+  \Large\theauthor\\
+\end{flushright}
+\HRule
+\vspace*{\stretch{2}}
+\markbreak{}
+\begin{center}
+ \large\textsc{\today}
+\end{center}
+\end{titlepage}
+}}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -218,32 +248,26 @@
 
 \pagestyle{fancyplain}
 
-\nameindent=2.125in
+\nameindent=0.475\textwidth
+%2.125in
 \directindent=0.5\nameindent
-
-\setcounter{secnumdepth}{-2}
-\addtolength{\headwidth}{\marginparsep}
-\addtolength{\headwidth}{\marginparwidth}
-%\renewcommand{\sectionmark}[1]%
-%    {\markboth{#1}{}\thispagestyle{empty}}
-%\renewcommand{\subsectionmark}[1]%
-%    {\markright{#1}}
-%\lhead[\fancyplain{}{\bfseries\thepage}]   {\fancyplain{}{\bfseries\rightmark}}
-%\chead[\fancyplain{}{\bfseries\leftmark}]  {\fancyplain{}{\bfseries\leftmark}}
-
-\lhead[\fancyplain{}{\bfseries\thepage}]   {\fancyplain{}{\bfseries\thescene}}
-\chead[\fancyplain{}{\bfseries\leftmark}]  {\fancyplain{}{\bfseries\theact}}
-\rhead[\fancyplain{}{\bfseries\rightmark}] {\fancyplain{}{\bfseries\thepage}}
-
-\cfoot[]{}
+\stageindent=0.75\nameindent
 
 \parindent 0pt
 
 \setlength{\namegap}{0pt}
 
-% Need to look at this one again.
-% I'm not sure which way I like it.
-%\reversemarginpar
+\setcounter{secnumdepth}{-2}
+\addtolength{\headwidth}{\marginparsep}
+\addtolength{\headwidth}{\marginparwidth}
+
+
+\lhead[\bfseries\thepage]   {\bfseries\thetitle}
+\chead[\bfseries\leftmark]  {\bfseries\leftmark}
+\rhead[\bfseries\rightmark] {\bfseries\Roman{act}-\arabic{scene}-\thepage}
+\cfoot[]{}
+
+
 
 %%%%
 %
