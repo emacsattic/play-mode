@@ -46,7 +46,6 @@ build-indep-stamp:
 	#/usr/bin/docbook-to-man debian/plywood.sgml > plywood.1
 
 	python setup.py build
-	cvs2cl
 	touch build-indep-stamp
 
 build: build-arch build-indep

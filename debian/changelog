@@ -5,6 +5,7 @@ plywood (0.5.3) unstable; urgency=low
   * Removed python-plywood package. Put python scripts in plywood.
   * No longer depend on python2.2. Rewrote the code so it should work with 2.1
     now.
+  * NOW: Intial debian package upload (closes: #146218)
 
  -- Monty Taylor <mordred@inaugust.com>  Wed,  8 May 2002 10:43:56 -0500
 
