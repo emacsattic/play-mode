@@ -1,3 +1,9 @@
+plywood (0.5.4) unstable; urgency=low
+
+  * Added a README and AUTHORS file. I suppose I should give props to people. 
+
+ -- Monty Taylor <mordred@camelot.inaugust.com>  Wed,  8 May 2002 13:23:16 -0500
+
 plywood (0.5.3) unstable; urgency=low
 
   * Debian native packages should not have debian revision numbers.

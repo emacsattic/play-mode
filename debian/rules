@@ -80,7 +80,7 @@ binary-indep: build install
 	dh_testdir -i
 	dh_testroot -i
 #	dh_installdebconf -i
-	dh_installdocs -i
+	dh_installdocs -i README AUTHORS
 	dh_installexamples -i
 	dh_installmenu -i
 #	dh_installlogrotate -i

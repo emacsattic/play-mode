@@ -1,0 +1,26 @@
+Plywood is a project to help type and typeset plays. It comprises
+a small structured-text format, an Emacs mode, a translation program and a
+LaTeX style.
+     
+The goals are:
+
+  1) Reduce the work of the playwright to that of writing a play. Even
+     learning special key strokes is discouraged -- the system should DWIM.
+
+  2) Make the plays pretty, yet conforming to standard formatting rules.
+
+Currently, we have implemented the Standard American format, as described by
+Samuel French.
+
+Documentation is very sparse at the moment, but I'm working on it. 
+
+Acknowledgments
+===============
+
+Many thanks to:
+
+Joerg Jaspert <joerg@debian.org> for sponsoring the debian package
+Nathan Jerkins <nlj00b@acu.edu>  for beta-testing
+Adam Hester <hestera@acu.edu>    for letting me introduce the software to his
+                                     playwriting class
+	     
