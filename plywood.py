@@ -10,11 +10,28 @@ preamble = r'''\documentclass[letterpaper]{article}
 \begin{document}
 '''
 
-class plywood:
+class plywood(object):
 
-  def do_title(self,match):
-    self.title=match.group(1)
-    return r'\title{%s}' % self.title
+  def __init__(self, filename):
+    self.filename=filename
+    self.newfile = string.join((filename[:filename.rfind(".ply")],"tex"),".")
+    self.infile=open(self.filename,'r')
+    self.outfile=open(self.newfile,'w')
+    
+  def segments(infile):
+    accum=""
+    fileg=infile.__iter__()
+    for line in fileg:
+      sline=string.strip(line)
+      if sline=='':
+        yield accum
+        accum=""
+        while sline=='':
+          sline=string.strip(fileg.next())
+      accum="%s\n%s"%(accum,sline)
+    yield accum
+  segments = staticmethod(segments)
+
   
   title_re=re.compile(r'\s*title:\s*(.*\S)\s*$',re.MULTILINE)
   author_re=re.compile(r'\s*author:\s*(.*\S)\s*$',re.MULTILINE)
@@ -28,6 +45,10 @@ class plywood:
   direction_re=re.compile(r'\s*[^{]\[\s*([^\]]+\S)\s*\]\s*')
   line_re=re.compile(r'^\s*([^=]+\S)\s*=\s*(.*\S)\s*',re.MULTILINE|re.DOTALL)
 
+  def do_title(self,match):
+    self.title=match.group(1)
+    return r'\title{%s}' % self.title
+  
   def replaces(self, line):
       line = self.title_re.sub(self.do_title,line)
       line = self.author_re.sub(r'\\author{\1}',line)
@@ -42,32 +63,13 @@ class plywood:
       line = self.line_re.sub(r'\line{\1}{\2}',line)
       return line
     
-  def __init__(self, filename):
-    self.filename=filename
-    self.newfile = string.join((filename[:filename.rfind(".ply")],"tex"),".")
-    self.infile=open(self.filename,'r')
-    self.outfile=open(self.newfile,'w')
-    
-  def segments(self):
-    accum=""
-    fileg=self.infile.__iter__()
-    for line in fileg:
-      sline=string.strip(line)
-      if sline=='':
-        yield accum
-        accum=""
-        while sline=='':
-          sline=string.strip(fileg.next())
-      accum="%s\n%s"%(accum,sline)
-    yield accum
-    
 
   def process(self):
 
     print "Generating %s from %s" % (self.newfile, self.filename)
     self.outfile.write(preamble)
     
-    for line in self.segments():
+    for line in self.segments(self.infile):
       self.outfile.write("%s\n" % self.replaces(line))
     self.outfile.write("%s\n" % r'\end{document}')
 

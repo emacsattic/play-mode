@@ -1,8 +1,7 @@
 title: Deathtrap
 author: Ira Levin
 
-act: one
-scene: two
+\newact
 
 Sidney = Actually it was built in seventeen-/ninety/-four, but they
 were out of nines at the hardware store, so I backdated it ten years. 
@@ -763,7 +762,7 @@ carry him toward the French doors, Sidney going backwards]
 Thank God
 he wasn't the fat one. [The lights fade to darkness]
 
-scene: three
+\newscene
 
  
 [When the lights come up, Myra is sitting and thinking, an empty
