@@ -7,9 +7,7 @@ setup (name = "Plywood",
        author_email = "mordred@inaugust.com",
        url = "http://inaugust.com/",
 
-       #package_dir = {'quixote':''},
-       #packages = ['quixote',  'quixote.demo', 'quixote.form'],
        py_modules = ['Plywood','WxPly'],
-       scripts = ['plywood']
-       #cmdclass = {'build_py': qx_build_py},
+       scripts = ['plywood'],
+
       )

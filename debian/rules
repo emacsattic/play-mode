@@ -35,7 +35,7 @@ build-arch-stamp:
 
 	# Add here command to compile/build the package.
 	python2.2 setup.py build
-
+	cvs2cl
 	touch build-arch-stamp
 
 build-indep:  configure-stamp build-indep-stamp
@@ -54,7 +54,7 @@ build: build-arch build-indep
 clean:
 	dh_testdir
 	dh_testroot
-	rm -f build-stamp configure-stamp build-indep-stamp build-arch-stamp
+	rm -f build-stamp configure-stamp build-indep-stamp build-arch-stamp ChangeLog
 
 	# Add here commands to clean up after the build process.
 	python2.2 setup.py clean --all
