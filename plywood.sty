@@ -193,6 +193,9 @@ by\\
 \newlength{\namegap}
 \setlength{\namegap}{0pt}
 
+\newlength{\indentgap}
+\setlength{\indentgap}{4em}
+
 % A line of dialog:
 
 % Monty-Style:
@@ -254,6 +257,11 @@ by\\
 \newcommand{\realnewscene}{
 {\hspace{\nameindent}\stepcounter{scene}\textsc{\thescene}}\vspace{18pt}}
 
+\long\def\heading#1
+{
+\hspace{\nameindent}\textsc{#1}\vspace{18pt}
+}
+
 \renewcommand{\theact}{Act \Roman{act}
 }
 \newcommand{\newact}{
@@ -289,6 +297,8 @@ by\\
 \addvspace{12pt}
 \end{sffamily}
 }
+
+\newcommand{\tab}{\hskip\indentgap}
 
 \newcommand{\HRule}{\rule{\linewidth}{0.1mm}}
 
