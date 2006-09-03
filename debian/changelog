@@ -1,3 +1,10 @@
+plywood (0.5.11) unstable; urgency=low
+
+  * Updated to new python policy and pysupport.
+  * Added a new example file.  
+
+ -- Monty Taylor <monty@inaugst.com>  Sun,  3 Sep 2006 12:31:54 -0700
+
 plywood (0.5.10) unstable; urgency=low
 
   * Changed build depends to python-dev. (closes: #261060,#259120)
