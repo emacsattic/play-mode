@@ -28,10 +28,11 @@ setup (name = "Plywood",
        author_email = "mordred@inaugust.com",
        url = "http://inaugust.com/",
 
-       py_modules = ['Plywood','WxPly'],
+       py_modules = [],
+       packages = ["Plywood"],
        entry_points = {
          'console_scripts': [
-           'plywood = Plywood:run',
+           'plywood = Plywood.Plywood:run',
          ]
        },
        #scripts = ['plywood'],

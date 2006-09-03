@@ -6,7 +6,11 @@ include /usr/share/cdbs/1/rules/debhelper.mk
 include /usr/share/cdbs/1/class/python-distutils.mk
 include /usr/share/cdbs/1/rules/simple-patchsys.mk
 
-# Install egg-info directories
 DEB_PYTHON_INSTALL_ARGS_ALL += --single-version-externally-managed
 
-
+common-install-arch common-install-indep:: plywood-install-hook
+plywood-install-hook:
+	mkdir -p debian/plywood/usr/share/texmf/tex/latex/plywood
+	install -m 644 plywood.sty debian/plywood/usr/share/texmf/tex/latex/plywood/plywood.sty
+	mkdir -p debian/plywood/usr/share/emacs/site-lisp/plywood
+	install -m 644 play-mode.el debian/plywood/usr/share/emacs/site-lisp/plywood/play-mode.el

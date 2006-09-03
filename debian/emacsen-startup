@@ -13,12 +13,12 @@
 ;; We have to add this to the load-path:
 (setq load-path (cons (concat "/usr/share/"
                               (symbol-name flavor)
-			      "/site-lisp/plywood-elisp") load-path))
+			      "/site-lisp/plywood") load-path))
 
 
 (autoload 'play-mode
     (concat "/usr/share/" (symbol-name debian-emacs-flavor)
-        "/site-lisp/plywood-elisp/play-mode.elc") "Play authoring mode." t)
+        "/site-lisp/plywood/play-mode.elc") "Play authoring mode." t)
 (setq auto-mode-alist
     (cons '("\\.ply$" . play-mode) auto-mode-alist))
 

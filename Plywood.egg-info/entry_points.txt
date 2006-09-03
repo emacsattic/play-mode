@@ -1,0 +1,3 @@
+[console_scripts]
+plywood = Plywood.Plywood:run
+
