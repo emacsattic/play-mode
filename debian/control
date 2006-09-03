@@ -9,7 +9,7 @@ Standards-Version: 3.7.2
 
 Package: plywood
 Architecture: all
-Depends: tetex-extra (>= 1.0.2), python, ${python:Depends}
+Depends: tetex-extra (>= 1.0.2), python, ${python:Depends}, python-plywood
 Suggests: pdf-viewer, postscript-viewer, gs
 Recommends: plywood-elisp
 XB-Python-Version: ${python:Versions}

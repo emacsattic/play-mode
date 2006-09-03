@@ -213,11 +213,24 @@ class Plywood:
   def close(self):
     self.infile.close()
     self.outfile.close()
+
+def run():
+  if len(sys.argv):
+    ply=Plywood(sys.argv[1])
+    ply.process()
+    ply.close()
+    ply.makedvi()
+    ply.pdflatex() # I know this is redundant, but I don't have time to do the
+    sys.exit(0)     # Other thing I want to do right now
+  try:
+    import WxPly.WxPly
+    app=WxPly.WxPly(0)
+    app.MainLoop()
+  except:
+    print "Try again."
+
     
 if __name__=="__main__":
-  ply=Plywood(sys.argv[1])
-  ply.process()
-  ply.close()
-  ply.pdflatex()
+  run()
 
   

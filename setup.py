@@ -15,7 +15,11 @@
 #     along with this program; if not, write to the Free Software
 #     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-from distutils.core import setup
+# bootstrap setuptools if necessary
+from ez_setup import use_setuptools
+use_setuptools()
+
+from setuptools import setup
 
 setup (name = "Plywood",
        version = "0.5.11",
@@ -25,6 +29,11 @@ setup (name = "Plywood",
        url = "http://inaugust.com/",
 
        py_modules = ['Plywood','WxPly'],
+       entry_points = {
+         'console_scripts': [
+           'plywood = Plywood:run',
+         ]
+       },
        #scripts = ['plywood'],
 
       )
